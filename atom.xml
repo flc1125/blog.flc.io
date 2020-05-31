@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://flc1125.github.io/blog.flc.io</id>
+    <id>https://flc1125.github.io/</id>
     <title>叶子坑</title>
-    <updated>2020-05-31T08:44:36.133Z</updated>
+    <updated>2020-05-31T08:45:44.325Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://flc1125.github.io/blog.flc.io"/>
-    <link rel="self" href="https://flc1125.github.io/blog.flc.io/atom.xml"/>
+    <link rel="alternate" href="https://flc1125.github.io/"/>
+    <link rel="self" href="https://flc1125.github.io/atom.xml"/>
     <subtitle>来也匆匆，去也冲冲...</subtitle>
-    <logo>https://flc1125.github.io/blog.flc.io/images/avatar.png</logo>
-    <icon>https://flc1125.github.io/blog.flc.io/favicon.ico</icon>
+    <logo>https://flc1125.github.io/images/avatar.png</logo>
+    <icon>https://flc1125.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 叶子坑</rights>
     <entry>
         <title type="html"><![CDATA[生活的真相 - 自由]]></title>
-        <id>https://flc1125.github.io/blog.flc.io/archives/the-truth-of-life-liberty/</id>
-        <link href="https://flc1125.github.io/blog.flc.io/archives/the-truth-of-life-liberty/">
+        <id>https://flc1125.github.io/archives/the-truth-of-life-liberty/</id>
+        <link href="https://flc1125.github.io/archives/the-truth-of-life-liberty/">
         </link>
         <updated>2020-02-26T04:24:40.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -67,8 +67,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[眠]]></title>
-        <id>https://flc1125.github.io/blog.flc.io/archives/mian/</id>
-        <link href="https://flc1125.github.io/blog.flc.io/archives/mian/">
+        <id>https://flc1125.github.io/archives/mian/</id>
+        <link href="https://flc1125.github.io/archives/mian/">
         </link>
         <updated>2019-11-19T10:47:29.000Z</updated>
         <content type="html"><![CDATA[<p>下面摘录的这段文字是摘自村上春树的《<a href="https://book.douban.com/subject/21692813/">眠</a>》。</p>
@@ -90,8 +90,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[顺序]]></title>
-        <id>https://flc1125.github.io/blog.flc.io/archives/order/</id>
-        <link href="https://flc1125.github.io/blog.flc.io/archives/order/">
+        <id>https://flc1125.github.io/archives/order/</id>
+        <link href="https://flc1125.github.io/archives/order/">
         </link>
         <updated>2019-11-13T10:02:04.000Z</updated>
         <content type="html"><![CDATA[<p>“顺序一说”来自《剑来》这本小说，也让我对“顺序”一词有了一个新认识。</p>
@@ -107,8 +107,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[自恋]]></title>
-        <id>https://flc1125.github.io/blog.flc.io/archives/narcissist/</id>
-        <link href="https://flc1125.github.io/blog.flc.io/archives/narcissist/">
+        <id>https://flc1125.github.io/archives/narcissist/</id>
+        <link href="https://flc1125.github.io/archives/narcissist/">
         </link>
         <updated>2019-10-29T16:23:26.000Z</updated>
         <summary type="html"><![CDATA[<p>按百度百科的解释：自恋是指自我崇拜，并过分关心自己完美的一种心理状态。</p>
@@ -137,8 +137,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[最后的问题]]></title>
-        <id>https://flc1125.github.io/blog.flc.io/archives/final-question/</id>
-        <link href="https://flc1125.github.io/blog.flc.io/archives/final-question/">
+        <id>https://flc1125.github.io/archives/final-question/</id>
+        <link href="https://flc1125.github.io/archives/final-question/">
         </link>
         <updated>2019-10-27T16:26:19.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
@@ -330,8 +330,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[死并非生的对立面，而作为生的一部永存]]></title>
-        <id>https://flc1125.github.io/blog.flc.io/archives/death-is-not-the-opposite-of-life-but-as-a-life-forever/</id>
-        <link href="https://flc1125.github.io/blog.flc.io/archives/death-is-not-the-opposite-of-life-but-as-a-life-forever/">
+        <id>https://flc1125.github.io/archives/death-is-not-the-opposite-of-life-but-as-a-life-forever/</id>
+        <link href="https://flc1125.github.io/archives/death-is-not-the-opposite-of-life-but-as-a-life-forever/">
         </link>
         <updated>2019-10-17T16:31:22.000Z</updated>
         <summary type="html"><![CDATA[<blockquote>
