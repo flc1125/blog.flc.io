@@ -6,7 +6,8 @@ author: Flc
 language: zh-CN
 timezone: Asia/Shanghai
 url: http://example.com
-permalink: ':year/:month/:day/:title/'
+# permalink: ':year/:month/:day/:title/'
+permalink: ':name/'
 permalink_defaults: null
 pretty_urls:
   trailing_index: true
