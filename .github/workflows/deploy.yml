@@ -1,0 +1,61 @@
+name: Deploy Site
+on:
+  push:
+    branchs: [master]
+
+env:
+  GO111MODULE: "on"
+  UPX_SERVICE_NAME: ${{ secrets.UPX_SERVICE_NAME }}
+  UPX_OPERATOR: ${{ secrets.UPX_OPERATOR }}
+  UPX_PASSWORD: ${{ secrets.UPX_PASSWORD }}
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install Package
+        run: |
+          npm install hexo-cli -g
+          npm install
+
+      - name: Golang
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14.13
+
+      - name: Cache Upx
+        uses: actions/cache@v2
+        id: cache-upx
+        with:
+          path: ~/go/
+          key: ${{ runner.os }}-go-upx
+
+      - name: Install Upx
+        if: steps.cache-upx.outputs.cache-hit != 'true'
+        run: |
+          go version
+          go get -u github.com/upyun/upx@v0.3.2
+
+      - name: Login Upx
+        run: |
+          ${HOME}/go/bin/upx login "${{ env.UPX_SERVICE_NAME }}" "${{ env.UPX_OPERATOR }}" "${{ env.UPX_PASSWORD }}"
+
+      - name: Build
+        run: |
+          hexo g
+
+      - name: Deploy
+        run: |
+          ${HOME}/go/bin/upx sync ./public/
