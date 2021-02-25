@@ -25,6 +25,8 @@ class User
 }
 ```
 
+<!-- more -->
+
 上面的示例将强制 `$user->id` 只能分配 `int` 值，而 `$user->name` 只能分配 `string` 值。
 
 ### 箭头函数
