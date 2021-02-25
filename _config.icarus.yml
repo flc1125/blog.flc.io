@@ -3,7 +3,9 @@ version: 4.0.0
 # Icarus theme variant, can be "default" or "cyberpunk"
 variant: default
 # Path or URL to the website's logo
-logo: /img/logo.svg
+# logo: /img/logo.svg
+logo: 
+    text: Flc
 # Page metadata configurations
 head:
     # URL or path to the website's icon
@@ -94,7 +96,7 @@ head:
         # E.g., name=theme-color;content=#123456 => <meta name="theme-color" content="#123456">
         - ''
     # URL or path to the website's RSS atom.xml
-    rss: 
+    rss: '/atom.xml'
 # Page top navigation bar configurations
 navbar:
     # Navigation menu items
@@ -116,6 +118,9 @@ footer:
         GitHub:
             icon: fab fa-github
             url: 'https://github.com/flc1125'
+        RSS:
+            icon: fas fa-rss
+            url: /atom.xml
 # Article related configurations
 article:
     # Code highlight settings
@@ -152,17 +157,17 @@ comment:
     shortname: ''
 # Donate plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Donation/
-donates:
+# donates:
     # "Afdian.net" donate button configurations
     # -
         # type: afdian
         # # URL to the "Afdian.net" personal page
         # url: ''
     # Alipay donate button configurations
-    -
-        type: alipay
-        # Alipay qrcode image URL
-        qrcode: ''
+    # -
+    #     type: alipay
+    #     # Alipay qrcode image URL
+    #     qrcode: ''
     # "Buy me a coffee" donate button configurations
     # -
     #     type: buymeacoffee
@@ -181,16 +186,16 @@ donates:
     #     # Currency code
         # currency_code: USD
     # Wechat donate button configurations
-    -
-        type: wechat
-        # Wechat qrcode image URL
-        qrcode: ''
+    # -
+    #     type: wechat
+    #     # Wechat qrcode image URL
+    #     qrcode: ''
 # Share plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Share/
-share:
-    type: sharethis
-    # URL to the ShareThis share plugin script
-    install_url: ''
+# share:
+#     type: sharethis
+#     # URL to the ShareThis share plugin script
+#     install_url: ''
 # Sidebar configurations.
 # Please be noted that a sidebar is only visible when it has at least one widget
 sidebar:
@@ -217,9 +222,9 @@ widgets:
         # Author's current location
         location: Shenzhen
         # URL or path to the avatar image
-        avatar: 
+        avatar: '/assets/avatar.jpg'
         # Whether show the rounded avatar image
-        avatar_rounded: false
+        avatar_rounded: true
         # Email address for the Gravatar
         gravatar: 
         # URL or path for the follow button
@@ -234,7 +239,7 @@ widgets:
                 url: 'https://flc.io'
             RSS:
                 icon: fas fa-rss
-                url: /
+                url: /atom.xml
     
     # Categories widget configurations
     -
