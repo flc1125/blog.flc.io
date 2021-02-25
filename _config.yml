@@ -5,7 +5,7 @@ keywords: null
 author: Flc
 language: zh-CN
 timezone: Asia/Shanghai
-url: https://blog.flc.io
+url: https://blog.flc.io/
 # permalink: ':year/:month/:day/:title/'
 permalink: ':name/'
 permalink_defaults: null
