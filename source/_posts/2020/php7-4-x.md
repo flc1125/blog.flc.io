@@ -3,8 +3,7 @@ title: PHP 各版本特性：PHP 7.4.x
 date: 2020-06-02 00:34:00
 updated: 2020-06-02 00:34:00
 categories: 编程
-tags:
-    - PHP
+tags: PHP
 toc: true
 ----
 
