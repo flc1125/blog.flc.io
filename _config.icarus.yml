@@ -236,7 +236,7 @@ widgets:
                 url: 'https://github.com/flc1125'
             Doc:
                 icon: fa fa-book
-                url: 'https://flc.io'
+                url: 'https://docs.flc.io'
             RSS:
                 icon: fas fa-rss
                 url: /atom.xml
@@ -281,6 +281,7 @@ widgets:
         # Names and URLs of the sites
         links:
             FLC: 'https://flc.io'
+            文档库: 'https://docs.flc.io'
     # Google FeedBurner email subscription widget configurations
     # -
     #     # Where should the widget be placed, left sidebar or right sidebar
