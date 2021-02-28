@@ -152,9 +152,9 @@ search:
 # Comment plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Comment/
 comment:
-    type: disqus
-    # Disqus shortname
-    shortname: ''
+    type: disqusjs
+    shortname: flc-io
+    api_key: OyrRHvj9NRXYJPC3GZU1cryqjQONsJhcHdxhEPP1ICSoH6GqtrY1o7s65tDCmbkY
 # Donate plugin configurations
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Donation/
 # donates:
