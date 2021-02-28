@@ -1,5 +1,5 @@
 ----
-title: Hello World！博客迁移说明~
+title: 🎉 Hello World！博客迁移说明~
 date: 2021-02-28 13:18:08
 categories: 随记
 toc: true
@@ -7,7 +7,7 @@ toc: true
 
 ## 迁移
 
-博客已于 2021-02-28 完成迁移~
+博客已于 2021-02-28 完成迁移🎉🎉
 
 **本次变更主要如下：**
 
