@@ -12,6 +12,8 @@ toc: true
 
 CDN 的全称是 Content Delivery Network，即内容分发网络。CDN 是构建在网络之上的内容分发网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN 的关键技术主要有内容存储和分发技术。 —— 摘自《[百度百科](https://baike.baidu.com/item/CDN/420951)》
 
+<!-- more -->
+
 ![](https://s.flc.io/2021-03-03-00-26-38.png)
 
 <small>_图片来源 阿里云_</small>
@@ -67,21 +69,11 @@ $result = Cache::remember('url', 100, function () {
 
 当涉及静态资源的更新操作的时候，更多的除了使用 URL 维度外，还会依靠附加参数的形式，进行 CDN 缓存的“更新”。但这个“更新”实际是静态资源生成新的 CDN 缓存。
 
-<article class="message message-immersive is-primary">
-    <div class="message-body">
-        <i class="fas fa-tips mr-2"></i>**总结**
+**总结**
 
 在实际的应用中，HTTP 请求的**任何参数**均可作为 CDN 缓存的维度，用来组合 Hash 生成唯一字符。
 
 这些维度包括 URL、参数、Header等。**但维度的增加也同样意味着 CDN 缓存命中率的降低。**
-    </div>
-</article>
-
-!!! tip "总结"
-
-    在实际的应用中，HTTP 请求的**任何参数**均可作为 CDN 缓存的维度，用来组合 Hash 生成唯一字符。
-
-    这些维度包括 URL、参数、Header等。**但维度的增加也同样意味着 CDN 缓存命中率的降低。**
 
 
 我们来看个例子：
@@ -163,11 +155,9 @@ echo 'Hello World!!!!!~';
 
 > 以上例子为阿里云 CDN，具体设置缓存过期时间，请参照 CDN 服务商文档进行设置。
 
-!!! tip ""
-
-    对于动态文件（eg：php | jsp | asp），建议设置缓存时间为 `0s`，即不缓存；若动态文件例如 php 文件内容更新频率较低，推荐设置较短缓存时间
-
-    —— 摘自《[阿里云说明文档](https://help.aliyun.com/document_detail/27136.html?spm=5176.11785003.domainDetail.6.7d79142fpxRL9k#h2-url-2)》
+> 对于动态文件（eg：php | jsp | asp），建议设置缓存时间为 `0s`，即不缓存；若动态文件例如 php 文件内容更新频率较低，推荐设置较短缓存时间
+>
+> —— 摘自《[阿里云说明文档](https://help.aliyun.com/document_detail/27136.html?spm=5176.11785003.domainDetail.6.7d79142fpxRL9k#h2-url-2)》
 
 **参考文档：**
 
@@ -191,14 +181,14 @@ echo 'Hello World!!!!!~';
 - 函数计算（阿里云）、Lambda（AWS）等
 - 内容存储：OSS（阿里云），S3（AWS）等 —— 可选
 
-!!! note "大致原理"
+**大致原理**
 
-    - 开启 CDN `Header - Accept` 回源
-    - 获取 `Request Headers` 中 `Accept` 中包含 `image/webp`（即为支持webp）
-    - 通过边缘计算方式，通过源站获取对应素材转换为 webp 格式，并存储至对应 CDN 节点
-    - 用户通过 CDN 输出对应格式
+- 开启 CDN `Header - Accept` 回源
+- 获取 `Request Headers` 中 `Accept` 中包含 `image/webp`（即为支持webp）
+- 通过边缘计算方式，通过源站获取对应素材转换为 webp 格式，并存储至对应 CDN 节点
+- 用户通过 CDN 输出对应格式
 
-    > 图片大多数源站均为 OSS、S3 等内容存储服务，而非具体服务器
+> 图片大多数源站均为 OSS、S3 等内容存储服务，而非具体服务器
 
 服务说明
 
@@ -212,9 +202,7 @@ echo 'Hello World!!!!!~';
 
     借助 Lambda，您几乎可以为任何类型的应用程序或后端服务运行代码，而且完全无需管理。只需上传您的代码，Lambda 会处理运行和扩展高可用性代码所需的一切工作。您可以将您的代码设置为自动从其他 AWS 产品触发，或者直接从任何 Web 或移动应用程序调用。
 
-    !!! tip ""
-        
-        支持语言： `Node.js`/`Python`/`Java`/`Go`/`C#`/`PowerShell`/`Ruby`
+    > 支持语言： `Node.js`/`Python`/`Java`/`Go`/`C#`/`PowerShell`/`Ruby`
 
 ## 相关文档
 
