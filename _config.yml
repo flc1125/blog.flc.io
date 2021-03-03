@@ -46,7 +46,7 @@ prismjs:
   tab_replace: ''
 index_generator:
   path: ''
-  per_page: 20
+  per_page: 25
   order_by: '-date'
 default_category: uncategorized
 category_map: null
@@ -55,7 +55,7 @@ meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
 updated_option: 'empty'
-per_page: 20
+per_page: 25
 pagination_dir: page
 include: null
 exclude: null
@@ -69,7 +69,7 @@ feed:
   enable: true
   type: atom
   path: atom.xml
-  limit: 20
+  limit: 25
   hub:
   content:
   content_limit: 99999
