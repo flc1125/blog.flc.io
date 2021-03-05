@@ -121,6 +121,9 @@ footer:
         RSS:
             icon: fas fa-rss
             url: /atom.xml
+        Sitemap:
+            icon: fa fa-sitemap
+            url: /sitemap.xml
 # Article related configurations
 article:
     # Code highlight settings
