@@ -78,3 +78,11 @@ feed:
   icon: icon.png
   autodiscovery: true
   template:
+
+# Sitemap
+sitemap:
+  path: sitemap.xml
+  template: 
+  rel: false
+  tags: true
+  categories: true
