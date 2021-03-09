@@ -36,6 +36,12 @@ toc: true
 > 来源：力扣（LeetCode）
 > 链接：https://leetcode-cn.com/problems/number-of-digit-one
 
+## 思路
+
+![](https://s.flc.io/2021-03-09-20-41-49.png)
+
+规律如图：个位数、十位数、百位数有1，然后……
+
 ## 代码
 
 ### Go
@@ -83,5 +89,33 @@ toc: true
         // fmt.Println(countDigitOne(100)) // 21
         // fmt.Println(countDigitOne(110)) // 33
         fmt.Println(countDigitOne(824883294)) //
+    }
+    ```
+
+- 代码二：参考官方讲解
+
+    ```go
+    package main
+
+    import (
+        "fmt"
+        "math"
+    )
+
+    func countDigitOne(n int) int {
+        var r int
+
+        for i := 1; i <= n; i *= 10 {
+            d := i * 10
+
+            r += (n / d) + int(math.Min(math.Max(float64(n%d-i+1), float64(0)), float64(i)))
+        }
+
+        return r
+    }
+
+    func main() {
+        fmt.Println(countDigitOne(100))
+        fmt.Println(countDigitOne(824883294))
     }
     ```
