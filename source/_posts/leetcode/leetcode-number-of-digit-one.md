@@ -108,14 +108,19 @@ toc: true
         for i := 1; i <= n; i *= 10 {
             d := i * 10
 
-            r += (n / d) + int(math.Min(math.Max(float64(n%d-i+1), float64(0)), float64(i)))
+            r += (n/d)*i + int(math.Min(math.Max(float64(n%d-i+1), float64(0)), float64(i)))
         }
 
         return r
     }
 
     func main() {
+        fmt.Println(countDigitOne(1))
+        fmt.Println(countDigitOne(11))
+        fmt.Println(countDigitOne(21))
         fmt.Println(countDigitOne(100))
         fmt.Println(countDigitOne(824883294))
     }
     ```
+
+    这个逻辑有点复杂。参考官网讲解：https://leetcode-cn.com/problems/number-of-digit-one/solution/shu-zi-1-de-ge-shu-by-leetcode/
