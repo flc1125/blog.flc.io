@@ -1,9 +1,10 @@
 ----
 title: LeetCode：两数之和
 date: 2021-3-3 21:28:20
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
+- LeetCode
 - PHP
 toc: true
 ----

@@ -1,9 +1,10 @@
 ----
 title: LeetCode：数字 1 的个数
 date: 2021-03-08 22:50:05
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
+- LeetCode
 toc: true
 ----
 
