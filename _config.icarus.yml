@@ -221,9 +221,9 @@ widgets:
         # Author name
         author: Flc゛
         # Author title
-        author_title: 来也匆匆，去也冲冲...
+        author_title: 希言自然。
         # Author's current location
-        location: Shenzhen
+        location: 
         # URL or path to the avatar image
         avatar: '/assets/avatar.jpg'
         # Whether show the rounded avatar image
