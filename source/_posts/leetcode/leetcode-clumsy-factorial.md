@@ -46,6 +46,10 @@ toc: true
 > 来源：力扣（LeetCode）
 > 链接：https://leetcode-cn.com/problems/clumsy-factorial
 
+## 思路
+
+数字规律，每三个存在一个乘除组合运算+一个加号运算。基于此进行分组即可。
+
 ## 代码
 
 ### Go
