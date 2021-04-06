@@ -1,7 +1,7 @@
 ----
 title: Flag：使用 Go 语言完成 LeetCode 100 道题打卡
 date: 2021-03-17 00:25:48
-updated: 2021-3-29 14:10:48
+updated: 2021-04-06 23:07:34
 cover: https://s.flc.io/2021-03-17-00-29-32.png
 categories: 编程
 tags: 
@@ -15,7 +15,7 @@ toc: true
 
 很简单：巩固、熟练 Go 语言。
 
-## 进度（20%）
+## 进度（23%）
 
 <!-- more -->
 
@@ -41,3 +41,6 @@ toc: true
 18. [变位词组](/leetcode-group-anagrams-lcci/)
 19. [颜色分类](/leetcode-sort-colors/)
 20. [电话号码的字母组合](/leetcode-letter-combinations-of-a-phone-number/)
+21. [笨阶乘](/leetcode-clumsy-factorial/)
+22. [检查两个字符串数组是否相等](/leetcode-check-if-two-string-arrays-are-equivalent/)
+23. [删除有序数组中的重复项 II](/leetcode-remove-duplicates-from-sorted-array-ii/)
