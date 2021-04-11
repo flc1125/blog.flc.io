@@ -4,6 +4,10 @@ date: 2021-04-11 23:36:35
 categories: 随记
 ----
 
+{% meting "004eabZ20VEGca" "tencent" "song" "autoplay" %}
+
+----
+
 很久没有写作了，总觉得要写点什么，但又无从写起。
 
 最近的人生感悟，如同流水一样，平淡无奇。
