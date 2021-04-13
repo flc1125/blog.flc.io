@@ -19,7 +19,7 @@ head:
         # when there is not enough space to display full name
         short_name: Flc
         # The start URL of the web application
-        start_url: 
+        start_url: .
         # The default theme color for the application
         theme_color: 
         # A placeholder background color for the application page to display
