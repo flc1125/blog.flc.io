@@ -48,8 +48,8 @@ toc: true
 
 ```json
 {
-  "name": "Push Notifications app",
-  "gcm_sender_id": "370072803732"
+    "name": "Push Notifications app",
+    "gcm_sender_id": "370072803732"
 }
 ```
 
@@ -69,17 +69,19 @@ toc: true
 
 ```json
 {
-	"name": "叶子坑",
-	"short_name": "Flc",
-	"start_url": ".",
-	"theme_color": null,
-	"background_color": null,
-	"display": "standalone",
-	"icons": [{
-		"src": "/assets/avatar.jpg",
-		"sizes": "541x541",
-		"type": "image/jpg"
-	}]
+    "name": "叶子坑",
+    "short_name": "Flc",
+    "start_url": ".",
+    "theme_color": null,
+    "background_color": null,
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/assets/avatar.jpg",
+            "sizes": "541x541",
+            "type": "image/jpg"
+        }
+    ]
 }
 ```
 
