@@ -1,7 +1,7 @@
 ----
 title: LeetCode：颜色分类
 date: 2021-03-30 22:11:49
-categories: 编程
+categories: [编程,LeetCode]
 tags: 
 - Go
 - LeetCode

@@ -1,7 +1,7 @@
 ----
 title: Web 应用程序清单 manifest[未完结]
 date: 2021-04-13 23:29:41
-categories: 编程
+categories: [编程,前端]
 tags: 
 - manifest
 - PWA

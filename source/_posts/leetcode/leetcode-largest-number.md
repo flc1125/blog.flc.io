@@ -1,7 +1,7 @@
 ----
 title: LeetCode：最大数
 date: 2021-04-12 23:33:58
-categories: 编程
+categories: [编程,LeetCode]
 tags: 
 - Go
 - LeetCode

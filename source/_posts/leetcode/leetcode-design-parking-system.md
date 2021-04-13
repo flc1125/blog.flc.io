@@ -1,7 +1,7 @@
 ----
 title: LeetCode：设计停车系统
 date: 2021-03-19 22:06:17
-categories: 编程
+categories: [编程,LeetCode]
 tags: 
 - Go
 - LeetCode

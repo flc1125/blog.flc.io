@@ -1,7 +1,7 @@
 ----
 title: LeetCode：删除字符串中的所有相邻重复项
 date: 2021-3-9 13:00:08
-categories: 编程
+categories: [编程,LeetCode]
 tags: 
 - Go
 - LeetCode
