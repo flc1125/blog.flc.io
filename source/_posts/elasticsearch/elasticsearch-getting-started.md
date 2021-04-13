@@ -1,8 +1,7 @@
 ----
 title: Elasticsearch 入门
 date: 2018-10-09
-categories: 
-- [编程]
+categories: [编程,后端]
 tags:
 - Elasticsearch
 - 教程

@@ -1,8 +1,7 @@
 ----
 title: Redis 配置统计字典：info 系统状态说明
 date: 2020-12-04 08:13
-categories: 
-- [编程]
+categories: [编程,后端]
 tags:
 - Redis
 - 笔记
