@@ -19,12 +19,12 @@ head:
         # when there is not enough space to display full name
         short_name: Flc
         # The start URL of the web application
-        start_url: .
+        start_url: "./?utm_source=web_app_manifest"
         # The default theme color for the application
         theme_color: 
         # A placeholder background color for the application page to display
         # before its stylesheet is loaded
-        background_color: 
+        background_color: "#fff"
         # The preferred display mode for the website
         display: standalone
         # Image files that can serve as application icons for different contexts
