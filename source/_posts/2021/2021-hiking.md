@@ -7,6 +7,8 @@ categories: 随记
 
 ![愿望塔](https://s.flc.io/2021-04-18-15-37-12.jpeg!blog)
 
+<!-- more -->
+
 ![](https://s.flc.io/2021-04-18-15-36-27.jpeg!blog)
 
 ![](https://s.flc.io/2021-04-18-15-36-44.jpeg!blog)
