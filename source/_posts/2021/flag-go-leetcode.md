@@ -1,7 +1,7 @@
 ----
 title: Flag：使用 Go 语言完成 LeetCode 100 道题打卡
 date: 2021-03-17 00:25:48
-updated: 2021-04-09 21:22:54
+updated: 2021-04-20 23:16:59
 cover: https://s.flc.io/2021-03-17-00-29-32.png
 categories: [编程,后端]
 tags: 
@@ -15,7 +15,7 @@ toc: true
 
 很简单：巩固、熟练 Go 语言。
 
-## 进度（26%）
+## 进度（30%）
 
 <!-- more -->
 
@@ -47,3 +47,7 @@ toc: true
 24. [搜索旋转排序数组 II](/leetcode-search-in-rotated-sorted-array-ii/)
 25. [有序数组中出现次数超过25%的元素](/leetcode-element-appearing-more-than-25-in-sorted-array/)
 26. [提莫攻击](/leetcode-teemo-attacking/)
+27. [最大数](/leetcode-largest-number/)
+28. [判断能否形成等差数列](/leetcode-can-make-arithmetic-progression-from-sequence/)
+29. [移除元素](/leetcode-remove-element/)
+30. [实现 strStr()](/leetcode-implement-strstr/)
