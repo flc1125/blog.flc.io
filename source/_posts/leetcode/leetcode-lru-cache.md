@@ -10,6 +10,12 @@ toc: true
 
 ## 题目
 
+> **前言：**
+> 
+> 推荐官方题解：https://leetcode-cn.com/problems/lru-cache/solution/lruhuan-cun-ji-zhi-by-leetcode-solution/
+> 
+> **注：对高性能的 LRU 理解，会有一定提升作用**
+
 运用你所掌握的数据结构，设计和实现一个  **`LRU` (最近最少使用) 缓存机制** 。
 
 实现 `LRUCache` 类：
@@ -57,10 +63,6 @@ lRUCache.get(4);    // 返回 4
 ## 代码
 
 ### Go
-
-> 推荐官方题解：https://leetcode-cn.com/problems/lru-cache/solution/lruhuan-cun-ji-zhi-by-leetcode-solution/
-> 
-> **注：对高性能的 LRU 理解，会有一定提升作用**
 
 如下题解：性能无官方性能优。
 
