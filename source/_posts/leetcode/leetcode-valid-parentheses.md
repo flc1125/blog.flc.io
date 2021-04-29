@@ -1,6 +1,7 @@
 ----
 title: LeetCode：有效的括号
 date: 2021-04-28 23:18:21
+updated: 2021-04-30 00:07:52
 categories: [编程,LeetCode]
 tags: 
 - Go
@@ -103,4 +104,45 @@ func main() {
 
 **堆栈写法：**
 
-> 待补充
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func isValid(s string) bool {
+	stack := []string{}
+
+	config := map[string]string{
+		")": "(",
+		"]": "[",
+		"}": "{",
+	}
+
+	for i := 0; i < len(s); i++ {
+		stri := string(s[i])
+
+		// 如果遇到左括号，就开始堆栈
+		if stri == "(" || stri == "[" || stri == "{" {
+			stack = append(stack, stri)
+		} else { // 否则从栈最右边进行比较和对比
+			if len(stack) == 0 || stack[len(stack)-1] != config[stri] {
+				return false
+			}
+
+			stack = stack[:len(stack)-1]
+		}
+
+	}
+
+	return len(stack) == 0
+}
+
+func main() {
+	fmt.Println(isValid("()"))
+	fmt.Println(isValid("()[]{}"))
+	fmt.Println(isValid("{[]}"))
+	fmt.Println(isValid("[{}]"))
+}
+```
