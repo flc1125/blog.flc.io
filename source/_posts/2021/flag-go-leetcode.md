@@ -1,7 +1,7 @@
 ----
 title: Flag：使用 Go 语言完成 LeetCode 100 道题打卡
 date: 2021-03-17 00:25:48
-updated: 2021-05-06 23:16:06
+updated: 2021-5-7 20:04:12
 cover: https://s.flc.io/2021-03-17-00-29-32.png
 categories: [编程,后端]
 tags: 
@@ -15,7 +15,7 @@ toc: true
 
 很简单：巩固、熟练 Go 语言。
 
-## 进度（38%）
+## 进度（42%）
 
 <!-- more -->
 
@@ -59,3 +59,7 @@ toc: true
 36. [第一个错误的版本](/leetcode-first-bad-version/)
 37. [有效的括号](/leetcode-valid-parentheses/)
 38. [判断路径是否相交](/leetcode-path-crossing/)
+39. [买卖股票的最佳时机](/leetcode-best-time-to-buy-and-sell-stock/)
+40. [最后一个单词的长度](/leetcode-length-of-last-word/)
+41. [查找常用字符](/leetcode-find-common-characters/)
+42. [环形链表（快慢指针）](/leetcode-linked-list-cycle/)
