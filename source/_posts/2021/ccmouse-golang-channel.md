@@ -1,7 +1,7 @@
 ----
 title: 笔记：搭建并行处理管道，感受GO语言魅力（未完结）
 date: 2021-05-17 21:27:05
-updated: 2021-05-17 22:49:03
+updated: 2021-05-18 23:37:48
 categories: [编程,后端]
 tags: 
 - Go
@@ -17,7 +17,7 @@ toc: true
 
 https://www.imooc.com/learn/927
 
-## Hello World
+## 基础编程
 
 ### Hello World 网络版
 
@@ -146,6 +146,127 @@ func channel() {
 }
 ```
 
+### 简单排序
+
+```go
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func main() {
+	var ints []int = []int{1, 8, 2, 5, 3, 10, 3, 4}
+
+	sort.Ints(ints)
+
+	fmt.Println(ints)
+}
+```
+
+## 归并排序算法
+
+### 基础节点
+
+```go
+package main
+
+import (
+	"fmt"
+	"sort"
+)
+
+func SourceArray(in ...int) <-chan int {
+	out := make(chan int)
+
+	go func() {
+		for _, i := range in {
+			out <- i
+		}
+		close(out)
+	}()
+
+	return out
+}
+
+func MemorySort(in <-chan int) <-chan int {
+	out := make(chan int)
+
+	go func() {
+		temp := []int{}
+
+		// 此处注意，无下标
+		for v := range in {
+			temp = append(temp, v)
+		}
+
+		sort.Ints(temp)
+
+		// 此处注意下标
+		for _, v := range temp {
+			out <- v
+		}
+
+		close(out)
+	}()
+
+	return out
+}
+
+func main() {
+	// 方法1
+	p := SourceArray(1, 2, 3, 4, 5)
+
+	for {
+		if v, ok := <-p; ok {
+			fmt.Println(v)
+		} else {
+			break
+		}
+	}
+	fmt.Println("--------------------------------")
+
+	// 方法二：直接循环通道
+	p2 := SourceArray(1, 2, 3, 4, 5)
+
+	for v := range p2 {
+		fmt.Println(v)
+	}
+	fmt.Println("--------------------------------")
+
+	// 协程排序
+	p3 := MemorySort(SourceArray(5, 6, 21, 1, 7, 10))
+
+	for v := range p3 {
+		fmt.Println(v)
+	}
+}
+```
+
+输出
+
+```
+1
+2
+3
+4
+5
+--------------------------------
+1
+2
+3
+4
+5
+--------------------------------
+1
+5
+6
+7
+10
+21
+```
+
 ## Channel 总结
 
 **基本用法**
@@ -158,6 +279,7 @@ msg := <-ch  // 通道出队
 ch <- "string" // 通道入队
 ```
 
+- 通道必须在协程内才可使用；另特定场景需要 [close](https://www.runoob.com/w3cnote/go-channel-intro.html#close) 通道
 ……
 
 ## 参考文档
