@@ -1,7 +1,7 @@
 ----
 title: 笔记：搭建并行处理管道，感受GO语言魅力（未完结）
 date: 2021-05-17 21:27:05
-updated: 2021-05-18 23:37:48
+updated: 2021-05-19 23:08:30
 categories: [编程,后端]
 tags: 
 - Go
@@ -167,7 +167,7 @@ func main() {
 
 ## 归并排序算法
 
-### 基础节点
+![](https://s.flc.io/2021-05-19-21-38-37.png)
 
 ```go
 package main
@@ -177,7 +177,7 @@ import (
 	"sort"
 )
 
-func SourceArray(in ...int) <-chan int {
+func arraySource(in ...int) <-chan int {
 	out := make(chan int)
 
 	go func() {
@@ -190,7 +190,7 @@ func SourceArray(in ...int) <-chan int {
 	return out
 }
 
-func MemorySort(in <-chan int) <-chan int {
+func arraySort(in <-chan int) <-chan int {
 	out := make(chan int)
 
 	go func() {
@@ -214,9 +214,44 @@ func MemorySort(in <-chan int) <-chan int {
 	return out
 }
 
+func arrayMerge(in1, in2 <-chan int) <-chan int {
+	out := make(chan int)
+
+	go func() {
+		for {
+			v1, ok1 := <-in1
+			v2, ok2 := <-in2
+
+			if !ok1 && !ok2 {
+				break
+			}
+
+			if ok1 && ok2 {
+				if v1 <= v2 {
+					out <- v1
+				} else {
+					out <- v2
+				}
+				continue
+			}
+
+			if ok1 && !ok2 {
+				out <- v1
+			} else {
+				out <- v2
+			}
+
+		}
+
+		close(out)
+	}()
+
+	return out
+}
+
 func main() {
 	// 方法1
-	p := SourceArray(1, 2, 3, 4, 5)
+	p := arraySource(1, 2, 3, 4, 5)
 
 	for {
 		if v, ok := <-p; ok {
@@ -228,7 +263,7 @@ func main() {
 	fmt.Println("--------------------------------")
 
 	// 方法二：直接循环通道
-	p2 := SourceArray(1, 2, 3, 4, 5)
+	p2 := arraySource(1, 2, 3, 4, 5)
 
 	for v := range p2 {
 		fmt.Println(v)
@@ -236,9 +271,20 @@ func main() {
 	fmt.Println("--------------------------------")
 
 	// 协程排序
-	p3 := MemorySort(SourceArray(5, 6, 21, 1, 7, 10))
+	p3 := arraySort(arraySource(5, 6, 21, 1, 7, 10))
 
 	for v := range p3 {
+		fmt.Println(v)
+	}
+	fmt.Println("--------------------------------")
+
+	// 归并节点
+	p4 := arrayMerge(
+		arraySort(arraySource(5, 6, 21, 1, 7, 10)),
+		arraySort(arraySource(15, 6, 21, 4, 3, 100)),
+	)
+
+	for v := range p4 {
 		fmt.Println(v)
 	}
 }
@@ -261,6 +307,13 @@ func main() {
 --------------------------------
 1
 5
+6
+7
+10
+21
+--------------------------------
+1
+4
 6
 7
 10
