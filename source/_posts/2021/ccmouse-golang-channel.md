@@ -1,7 +1,7 @@
 ----
 title: 笔记：搭建并行处理管道，感受GO语言魅力（未完结）
 date: 2021-05-17 21:27:05
-updated: 2021-05-19 23:08:30
+updated: 2021-05-21 00:15:53
 categories: [编程,后端]
 tags: 
 - Go
@@ -319,6 +319,105 @@ func main() {
 10
 21
 ```
+
+## 文件读写
+
+```go
+package main
+
+import (
+	"bufio"
+	"encoding/binary"
+	"fmt"
+	"io"
+	"math/rand"
+	"os"
+)
+
+func readSource(r io.Reader) <-chan int {
+	out := make(chan int)
+
+	go func() {
+		buffer := make([]byte, 8)
+
+		for {
+			n, err := r.Read(buffer)
+
+			if n > 0 {
+				out <- int(binary.BigEndian.Uint64(buffer))
+			}
+
+			if err != nil {
+				break
+			}
+		}
+
+		close(out)
+	}()
+
+	return out
+}
+
+func writeSource(w io.Writer, in <-chan int) {
+	for v := range in {
+		buffer := make([]byte, 8)
+
+		binary.BigEndian.PutUint64(buffer, uint64(v))
+
+		w.Write(buffer)
+	}
+}
+
+func randomSource(count int) <-chan int {
+	out := make(chan int)
+
+	go func() {
+		for count > 0 {
+			out <- rand.Intn(10)
+			count--
+		}
+
+		close(out)
+	}()
+
+	return out
+}
+
+func main() {
+	// 生成随机数
+	p := randomSource(50)
+
+	for v := range p {
+		fmt.Println(v)
+	}
+
+	// 文件读写
+	// 写入文件
+	file, err := os.Create("tests.log")
+	if err != nil {
+		panic("Error")
+	}
+	defer file.Close()
+
+	randints := randomSource(100)
+	writer := bufio.NewWriter(file)
+	writeSource(writer, randints)
+	writer.Flush()
+
+	// 文件读取
+	file2, err2 := os.Open("tests.log")
+	if err2 != nil {
+		panic("Error")
+	}
+	defer file2.Close()
+	p3 := readSource(bufio.NewReader(file2))
+	for v := range p3 {
+		fmt.Println(v)
+	}
+}
+```
+
+> 一堆新方法和函数……
 
 ## Channel 总结
 
