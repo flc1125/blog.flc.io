@@ -419,9 +419,13 @@ func main() {
 
 > 一堆新方法和函数……
 
-## Channel 总结
+## 网络版外部排序
 
-**基本用法**
+> 大意：将数据通过网络请求到服务端；在另外通过客户端请求服务端，将数据读取
+
+## 总结
+
+**channel 相关**
 
 ```go
 ch := make(chan string) // 创建一个字符串的通道
@@ -429,10 +433,26 @@ ch := make(chan string) // 创建一个字符串的通道
 msg := <-ch  // 通道出队
 
 ch <- "string" // 通道入队
+
+// [通过缓存的使用，可以尽量避免阻塞，提供应用的性能]
+// 设置 channel 最多容纳元素的数量（该示例为100）；
+// 如果没有设置容量，或者容量设置为0, 说明Channel没有缓存；
+ch := make(chan string, 100)
+
+close(ch) // close方法可以关闭Channel。
+
+v, ok := <-ch  // ok 可判定 channel 是否被关闭
+
+// 直接读取 channel 内容，直到 channel 被关闭
+for v := range ch {
+	fmt.Println(i)
+}
 ```
 
-- 通道必须在协程内才可使用；另特定场景需要 [close](https://www.runoob.com/w3cnote/go-channel-intro.html#close) 通道
-……
+- 其他 `defer` 先进后出
+- `go tool tour` 可进入交互式调试界面，若无法使用，请安装 `go get golang.org/x/tour/gotour`
+- 中文版（非官方）文档：http://docscn.studygolang.com/doc/
+  - https://github.com/golang/tour/
 
 ## 参考文档
 
