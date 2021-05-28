@@ -1,7 +1,7 @@
 ----
 title: 笔记：GO 实现千万级 WebSocket 消息推送服务
 date: 2021-05-24 21:45:05
-updated: 2021-05-24 21:45:08
+updated: 2021-05-28 23:25:39
 categories: [编程,后端]
 tags: 
 - Go
@@ -74,7 +74,7 @@ Demo 地址：https://github.com/flc1125/go-websocket-chat-demo
 > 基于课程调整为多客户端的聊天工具。
 
 
-### 千万级弹幕架构说明
+### 千万级弹幕技术难点
 
 **技术难点**
 
@@ -117,19 +117,126 @@ CPU 瓶颈
   - JSON 编码前置，1 次消息编码 + 100W 次推送
   - 合并消息前置，N 条消息合并只编码 1 次
 
-**技术架构**
+### 千万级弹幕技术架构
 
 **单机架构**
 
 ![](https://s.flc.io/2021-05-28-00-13-42.png)
 
-### 课外补充：`select`
+单机瓶颈
 
-> 待补充
+- 维护海量连接，占用内存
+- 消息推送，瞬时 CPU 压力大
+- 消息推送瞬时带宽达 400~600MB，主要瓶颈
+
+**分布式架构**
+
+网关集群
+
+![](https://s.flc.io/2021-05-28-22-54-04.png)
+
+逻辑集群
+
+- 基于 HTTP/2 协议向网关集群分发消息
+  - HTTP/2 支持连接复用，用作 RPC 性能更佳
+- 基于 HTTP/1 对外提供 API（其实也可以通过 HTTP/2 且性能更优）
+
+整体架构
+
+![](https://s.flc.io/2021-05-28-22-58-20.png)
+
+> 说了跟没说一样……
+
+### 课外补充：`select` 语句
+
+示例：
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+var (
+	a = make(chan int)
+	b = make(chan int)
+	c = make(chan int)
+)
+
+func worker() {
+	for {
+		select {
+		case aa := <-a:
+			fmt.Println("a:", aa)
+		case bb := <-b:
+			fmt.Println("b:", bb)
+		case <-c:
+			fmt.Println("c:", <-c)  // 注意该值
+		}
+	}
+}
+
+func producer() {
+	for i := 0; i <= 30; i++ {
+		go func(i int) {
+			if i <= 10 {
+				a <- i
+			} else if i > 10 && i <= 20 {
+				b <- i
+			} else {
+				c <- i
+			}
+		}(i)
+	}
+}
+
+func main() {
+	go worker()
+
+	go producer()
+
+	time.Sleep(time.Second * 1)
+}
+```
+
+输出
+
+```
+a: 1
+b: 13
+a: 0
+c: 22
+b: 11
+c: 24
+c: 26
+a: 3
+b: 12
+a: 4
+b: 14
+a: 5
+b: 15
+c: 27
+a: 6
+a: 7
+c: 29
+b: 16
+b: 17
+b: 18
+b: 19
+a: 8
+a: 9
+b: 20
+a: 10
+a: 2
+```
 
 ## 总结
 
 - 课程内容理论尚可，实践偏弱，千万级弹幕的系统具体实现几乎没有；演练的 Demo 也仅支持单人弹幕。
+- websocket 是基于 HTTP 请求的 upgrade 版
+- channel 应用：在客户端长连接到服务端、断开连接、接收消息、发送消息等均可使用
 
 ## 参考
 
