@@ -1,7 +1,7 @@
 ----
 title: 笔记：Go开发短地址服务
 date: 2021-05-31 22:42:13
-updated: 2021-05-31 22:43:18
+updated: 2021-06-07 00:23:33
 categories: [编程,后端]
 tags: 
 - Go
@@ -18,3 +18,15 @@ toc: true
 https://www.imooc.com/learn/1150
 
 <!-- more -->
+
+## 实战
+
+基于 Golang & Echo 框架实现的短网址 Demo
+
+https://github.com/flc1125/go-shorturl-demo
+
+**待优化：**
+
+- DB 接入
+- 优化代码
+- 封装集成
