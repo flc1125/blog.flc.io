@@ -1,7 +1,7 @@
 ----
 title: Flag：使用 Go 语言完成 LeetCode 100 道题打卡
 date: 2021-03-17 00:25:48
-updated: 2021-06-07 23:55:22
+updated: 2021-06-29 23:54:43
 cover: https://s.flc.io/2021-03-17-00-29-32.png
 categories: [编程,后端]
 tags: 
@@ -15,7 +15,7 @@ toc: true
 
 很简单：巩固、熟练 Go 语言。
 
-## 进度（50%）
+## 进度（56%）
 
 <!-- more -->
 
@@ -71,3 +71,9 @@ toc: true
 48. [路径总和](/leetcode-path-sum/)
 49. [回文数](/leetcode-palindrome-number/)
 50. [目标和](/leetcode-target-sum/)
+51. [判定字符是否唯一](/leetcode-is-unique-lcci/)
+52. [判定是否互为字符重排](/leetcode-check-permutation-lcci/)
+53. [URL化](/leetcode-string-to-url-lcci/)
+54. [回文排列](/leetcode-palindrome-permutation-lcci/)
+55. [字符串压缩](/leetcode-compress-string-lcci/)
+56. [全排列](/leetcode-permutations/)
