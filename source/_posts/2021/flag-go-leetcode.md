@@ -1,7 +1,7 @@
 ----
 title: Flag：使用 Go 语言完成 LeetCode 100 道题打卡
 date: 2021-03-17 00:25:48
-updated: 2021-06-29 23:54:43
+updated: 2021-9-13 09:46:04
 cover: https://s.flc.io/2021-03-17-00-29-32.png
 categories: [编程,后端]
 tags: 
@@ -15,11 +15,9 @@ toc: true
 
 很简单：巩固、熟练 Go 语言。
 
-## 进度（56%）
+## 进度（59%）
 
 <!-- more -->
-
-> 不定期更新
 
 1. [两数之和](/leetcode-two-sum/)
 2. [比特位计数](/leetcode-counting-bits/)
@@ -77,3 +75,14 @@ toc: true
 54. [回文排列](/leetcode-palindrome-permutation-lcci/)
 55. [字符串压缩](/leetcode-compress-string-lcci/)
 56. [全排列](/leetcode-permutations/)
+57. [Excel 表列名称](/leetcode-excel-sheet-column-title/)
+58. [移动零](/leetcode-move-zeroes/)
+59. [链表中倒数第 k 个节点](/leetcode-lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
+
+## 结果
+
+**失败告终~** 原因如下：
+
+- 时间问题：带娃，已经没那么多时间去做这些~
+- 暂无意义：从起初的目的而言，目前已达标，无需依靠此类方式进行巩固与熟练，接下来需要的更多是实战。
+- 目标转移：需要将精力、体力转移更重要的事：扩开技术视野~
