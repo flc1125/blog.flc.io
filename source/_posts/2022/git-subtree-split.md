@@ -7,6 +7,16 @@ tags:
 toc: true
 ----
 
+## 先看效果
+
+- 拆仓库前：https://github.com/laravel/framework/tree/9.x/src/Illuminate
+
+    ![](https://s.flc.io/2022-05-18-10-20-04.png)
+
+- 拆仓库后：https://github.com/illuminate
+
+    ![](https://s.flc.io/2022-05-18-10-21-09.png)
+    
 ## `split.sh` 拆包脚本
 
 > 放置主仓库的 `/bin` 目录下
