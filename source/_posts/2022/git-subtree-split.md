@@ -4,6 +4,7 @@ date: 2022-05-18 09:36:42
 categories: [编程,工具]
 tags:
 - Git
+toc: true
 ----
 
 ## `split.sh` 拆包脚本
