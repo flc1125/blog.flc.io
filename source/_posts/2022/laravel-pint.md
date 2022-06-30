@@ -11,6 +11,8 @@ categories: [编程,工具]
 - 配置兼容 [php-cs-fixer](https://cs.symfony.com/)
 - 支持 Laravel 与非 Laravel 项目
 
+<!-- more -->
+
 ## 安装
 
 - 安装 pint
