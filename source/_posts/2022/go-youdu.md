@@ -17,6 +17,8 @@ github.com/go-packagist/youdu
 go get github.com/go-packagist/youdu
 ```
 
+<!-- more -->
+
 ## 使用
 
 ```go
