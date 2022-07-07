@@ -9,7 +9,7 @@ tags:
 
 ## 地址
 
-github.com/go-packagist/youdu
+[github.com/go-packagist/youdu](https://github.com/go-packagist/youdu)
 
 ## 安装
 
@@ -66,4 +66,4 @@ func main() {
 
 ## 参考资料
 
-- 有度 API 官方文档：youdu.im/doc/api/c01_00001.html
+- 有度 API 官方文档：(youdu.im/doc/api/c01_00001.html)[https://youdu.im/doc/api/c01_00001.html]
