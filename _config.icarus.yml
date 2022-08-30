@@ -237,12 +237,9 @@ widgets:
             Github:
                 icon: fab fa-github
                 url: 'https://github.com/flc1125'
-            Doc:
+            Docs:
                 icon: fa fa-book
                 url: 'https://docs.flc.io'
-            Status:
-                icon: fa-solid fa-signal-bars-good
-                url: 'https://status.flc.io/'
             RSS:
                 icon: fas fa-rss
                 url: /atom.xml
