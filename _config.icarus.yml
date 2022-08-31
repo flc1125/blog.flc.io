@@ -124,6 +124,9 @@ footer:
         Sitemap:
             icon: fa fa-sitemap
             url: /sitemap.xml
+        Status:
+            icon: fa fa-desktop
+            url: https://status.flc.io
 # Article related configurations
 article:
     # Code highlight settings
