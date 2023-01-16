@@ -6,7 +6,6 @@ author: Flc
 language: zh-CN
 timezone: Asia/Shanghai
 url: https://flc.io/
-# permalink: ':year/:month/:day/:title/'
 permalink: ':name/'
 permalink_defaults: null
 pretty_urls:
@@ -54,7 +53,7 @@ tag_map: null
 meta_generator: true
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-updated_option: 'empty'
+updated_option: mtime
 per_page: 25
 pagination_dir: page
 include: null
@@ -63,6 +62,19 @@ ignore: null
 theme: icarus
 deploy:
   type: ''
+
+
+# Sitemap @see https://github.com/hexojs/hexo-generator-sitemap
+sitemap:
+  path: sitemap.xml
+  template: 
+  rel: false
+  tags: true
+  categories: true
+
+# Aplayer(https://github.com/MoePlayer/hexo-tag-aplayer/)
+aplayer:
+  meting: true
 
 # RSS
 feed:
@@ -78,15 +90,3 @@ feed:
   icon: icon.png
   autodiscovery: true
   template:
-
-# Sitemap
-sitemap:
-  path: sitemap.xml
-  template: 
-  rel: false
-  tags: true
-  categories: true
-
-# Aplayer(https://github.com/MoePlayer/hexo-tag-aplayer/)
-aplayer:
-  meting: true
