@@ -75,3 +75,18 @@ sitemap:
 # Aplayer(https://github.com/MoePlayer/hexo-tag-aplayer/)
 aplayer:
   meting: true
+
+# RSS
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 25
+  hub:
+  content:
+  content_limit: 99999
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
+  template:

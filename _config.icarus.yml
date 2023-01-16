@@ -1,18 +1,19 @@
 version: 5.1.0
 variant: default
-logo: /img/logo.svg
+logo: 
+    text: Flc゛
 head:
-    favicon: /img/favicon.svg
+    favicon: /assets/images/favicon.ico
     manifest:
         name: 叶子坑
         short_name: Flc
         start_url: "./?utm_source=web_app_manifest"
-        theme_color: ""
+        theme_color: "green"
         background_color: "#fff"
         display: standalone
         icons:
             -
-                src: /assets/avatar.jpg
+                src: /assets/images/avatar.jpg
                 sizes: '541x541'
                 type: image/jpg
     open_graph:
@@ -52,6 +53,7 @@ navbar:
             icon: fab fa-github
             url: 'https://github.com/flc1125/blog.flc.io'
 footer:
+    copyright: '<a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备15063901号</a>'
     links:
         GitHub:
             icon: fab fa-github
@@ -92,13 +94,13 @@ comment:
 donates:
     -
         type: wechat
-        qrcode: '/assets/wechat.jpg'
+        qrcode: '/assets/images/wechat.jpg'
     -
         type: alipay
-        qrcode: '/assets/alipay.jpg'
-share:
-    type: sharethis
-    install_url: ''
+        qrcode: '/assets/images/alipay.jpg'
+# share:
+    # type: sharethis
+    # install_url: 'https://platform-api.sharethis.com/js/sharethis.js#property=undefined&product=undefined'
 sidebar:
     left:
         sticky: false
@@ -111,7 +113,7 @@ widgets:
         author: Flc゛
         author_title: 希言自然。
         location: 
-        avatar: '/assets/avatar.jpg'
+        avatar: '/assets/images/avatar.jpg'
         avatar_rounded: true
         gravatar: 
         follow_link: https://github.com/flc1125
@@ -147,8 +149,9 @@ widgets:
         position: right
         type: links
         links:
-            FLC: 'https://flc.io'
-            文档库: 'https://docs.flc.io'
+            FLC: https://flc.io
+            文档库: https://docs.flc.io
+            粤ICP备15063901号: https://beian.miit.gov.cn/
     -
         position: right
         type: archives
