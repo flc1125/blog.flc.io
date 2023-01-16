@@ -17,6 +17,8 @@ toc: true
 
     ![](https://s.flc.io/2022-05-18-10-21-09.png)
     
+<!-- more -->
+
 ## `split.sh` 拆包脚本
 
 > 放置主仓库的 `/bin` 目录下
