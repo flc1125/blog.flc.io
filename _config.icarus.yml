@@ -4,17 +4,17 @@ logo: /img/logo.svg
 head:
     favicon: /img/favicon.svg
     manifest:
-        name: 
-        short_name: 
-        start_url: 
-        theme_color: 
-        background_color: 
+        name: 叶子坑
+        short_name: Flc
+        start_url: "./?utm_source=web_app_manifest"
+        theme_color: ""
+        background_color: "#fff"
         display: standalone
         icons:
             -
-                src: ''
-                sizes: ''
-                type: 
+                src: /assets/avatar.jpg
+                sizes: '541x541'
+                type: image/jpg
     open_graph:
         title: 
         type: blog
@@ -39,29 +39,32 @@ head:
         image: 
     meta:
         - ''
-    rss: 
+    rss: '/atom.xml'
 navbar:
     menu:
-        Home: /
-        Archives: /archives
-        Categories: /categories
-        Tags: /tags
-        About: /about
+        首页: /
+        归档: /archives/
+        分类: /categories/
+        标签: /tags/
+        关于: /about/
     links:
         Download on GitHub:
             icon: fab fa-github
-            url: https://github.com/ppoffice/hexo-theme-icarus
+            url: 'https://github.com/flc1125/blog.flc.io'
 footer:
     links:
-        Creative Commons:
-            icon: fab fa-creative-commons
-            url: https://creativecommons.org/
-        Attribution 4.0 International:
-            icon: fab fa-creative-commons-by
-            url: https://creativecommons.org/licenses/by/4.0/
-        Download on GitHub:
+        GitHub:
             icon: fab fa-github
-            url: https://github.com/ppoffice/hexo-theme-icarus
+            url: 'https://github.com/flc1125'
+        RSS:
+            icon: fas fa-rss
+            url: /atom.xml
+        Sitemap:
+            icon: fa fa-sitemap
+            url: /sitemap.xml
+        Status:
+            icon: fa fa-desktop
+            url: https://status.flc.io
 article:
     highlight:
         theme: atom-one-light
@@ -70,41 +73,29 @@ article:
     readtime: true
     update_time: true
     licenses:
-        Creative Commons:
-            icon: fab fa-creative-commons
-            url: https://creativecommons.org/
-        Attribution:
-            icon: fab fa-creative-commons-by
-            url: https://creativecommons.org/licenses/by/4.0/
-        Noncommercial:
-            icon: fab fa-creative-commons-nc
-            url: https://creativecommons.org/licenses/by-nc/4.0/
+        # Creative Commons:
+        #     icon: fab fa-creative-commons
+        #     url: https://creativecommons.org/
+        # Attribution:
+        #     icon: fab fa-creative-commons-by
+        #     url: https://creativecommons.org/licenses/by/4.0/
+        # Noncommercial:
+        #     icon: fab fa-creative-commons-nc
+        #     url: https://creativecommons.org/licenses/by-nc/4.0/
 search:
     type: insight
     index_pages: true
 comment:
-    type: disqus
-    shortname: ''
+    type: disqusjs
+    shortname: flc-io
+    api_key: OyrRHvj9NRXYJPC3GZU1cryqjQONsJhcHdxhEPP1ICSoH6GqtrY1o7s65tDCmbkY
 donates:
     -
-        type: afdian
-        url: ''
+        type: wechat
+        qrcode: '/assets/wechat.jpg'
     -
         type: alipay
-        qrcode: ''
-    -
-        type: buymeacoffee
-        url: ''
-    -
-        type: patreon
-        url: ''
-    -
-        type: paypal
-        business: ''
-        currency_code: USD
-    -
-        type: wechat
-        qrcode: ''
+        qrcode: '/assets/alipay.jpg'
 share:
     type: sharethis
     install_url: ''
@@ -117,50 +108,26 @@ widgets:
     -
         position: left
         type: profile
-        author: Your name
-        author_title: Your title
-        location: Your location
-        avatar: 
-        avatar_rounded: false
+        author: Flc゛
+        author_title: 希言自然。
+        location: 
+        avatar: '/assets/avatar.jpg'
+        avatar_rounded: true
         gravatar: 
-        follow_link: https://github.com/ppoffice
+        follow_link: https://github.com/flc1125
         social_links:
             Github:
                 icon: fab fa-github
-                url: https://github.com/ppoffice
-            Facebook:
-                icon: fab fa-facebook
-                url: https://facebook.com
-            Twitter:
-                icon: fab fa-twitter
-                url: https://twitter.com
-            Dribbble:
-                icon: fab fa-dribbble
-                url: https://dribbble.com
+                url: 'https://github.com/flc1125'
+            Docs:
+                icon: fa fa-book
+                url: 'https://docs.flc.io'
             RSS:
                 icon: fas fa-rss
-                url: /
-    -
-        position: left
-        type: toc
-        index: true
-        collapsed: true
-        depth: 3
-    -
-        position: left
-        type: links
-        links:
-            Hexo: https://hexo.io
-            Bulma: https://bulma.io
+                url: /atom.xml
     -
         position: left
         type: categories
-    -
-        position: left
-        type: recent_posts
-    -
-        position: left
-        type: archives
     -
         position: left
         type: tags
@@ -168,41 +135,43 @@ widgets:
         amount: 
         show_count: true
     -
-        position: left
-        type: subscribe_email
-        description: 
-        feedburner_id: ''
+        position: right
+        type: toc
+        index: true
+        collapsed: true
+        depth: 3
     -
-        position: left
-        type: adsense
-        client_id: ''
-        slot_id: ''
+        position: right
+        type: recent_posts
     -
-        position: left
-        type: followit
-        description: 
-        action_url: ''
-        verification_code: ''
+        position: right
+        type: links
+        links:
+            FLC: 'https://flc.io'
+            文档库: 'https://docs.flc.io'
+    -
+        position: right
+        type: archives
 plugins:
-    animejs: true
+    animejs: false
     back_to_top: true
     baidu_analytics:
-        tracking_id: 
+        tracking_id: ed6f6d8ec4a13c3c200a5f60b8203403
     bing_webmaster:
         tracking_id: 
     busuanzi: false
     cnzz:
         id: 
         web_id: 
-    cookie_consent:
-        type: info
-        theme: edgeless
-        static: false
-        position: bottom-left
-        policyLink: https://www.cookiesandyou.com/
+    # cookie_consent:
+        # type: info
+        # theme: edgeless
+        # static: false
+        # position: bottom-left
+        # policyLink: https://www.cookiesandyou.com/
     gallery: true
     google_analytics:
-        tracking_id: 
+        tracking_id: UA-118478085-1
     hotjar:
         site_id: 
     katex: false
