@@ -3,9 +3,22 @@
 - Hexo version upgraded from 5.4.1 -> 9.3.0
 
 
-
+{
+  "name": "hexo-site",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "deploy": "hexo deploy",
+    "server": "hexo server"
+  },
+  "hexo": {
+    "version": "5.4.1"
+  },
+  "dependencies": {
     "bulma-stylus": "^0.8.0",
-    "hexo": "^6.3.0",
+    "hexo": "^5.4.1",
     "hexo-component-inferno": "^0.10.5",
     "hexo-generator-archive": "^1.0.0",
     "hexo-generator-category": "^1.0.0",
@@ -19,3 +32,6 @@
     "hexo-renderer-marked": "^5.0.0",
     "hexo-renderer-stylus": "^2.0.1",
     "hexo-server": "^3.0.0",
+    "hexo-tag-aplayer": "^3.0.4"
+  }
+}
