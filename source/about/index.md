@@ -5,7 +5,7 @@ permalink: "about/"
 
 > 🍭 待补充，反正我也不会补 🙄
 > 
-> <small style="color: #999;">----------- _一个华丽丽的分割线_ -----------</small>
+> <small style="color: #999;">----------- _一条华丽丽的分割线_ -----------</small>
 > 
 > 我有一个朋友的头像是一只🐶，他老婆每次赞美别人的时候，都指着我们，然后对人家说：“🐷🐶不如”……
 
@@ -20,3 +20,6 @@ permalink: "about/"
 - 💻 [Laravel Hprose RPC 服务](https://github.com/flc1125/laravel-hprose)
 - 🛒 [淘宝接口API开发](https://github.com/flc1125/taobao-open-api)
 - 🔍 [Laravel Elasticsearch 扩展包](https://github.com/flc1125/laravel-elasticsearch)
+- _未完待续……_ 
+
+> <small style="color: #999;"> 😑😑 自己看吧：[github.com/flc1125](https://github.com/flc1125) </small>
