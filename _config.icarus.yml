@@ -162,7 +162,7 @@ plugins:
         tracking_id: ed6f6d8ec4a13c3c200a5f60b8203403
     bing_webmaster:
         tracking_id: 
-    busuanzi: false
+    busuanzi: true
     cnzz:
         id: 
         web_id: 
