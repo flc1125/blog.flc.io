@@ -1,7 +1,7 @@
 ----
 title: Redis：处理 bigkey
 date: 2020-11-20 14:20
-categories: [后端]
+categories: 编程
 tags:
 - Redis
 - 笔记

@@ -1,13 +1,14 @@
 ----
 title: 细胞与星球
 date: 2021-04-19 23:00:01
-categories: 随记
+categories: 生活
+tags:
+- 随记
 ----
 
 **关于信仰**
 
 《[少年派的奇幻漂流](https://movie.douban.com/subject/1929463/)》
-
 
 ----
 

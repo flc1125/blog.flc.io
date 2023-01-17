@@ -1,7 +1,7 @@
 ----
 title: 整理：Google Web Fundamentals - 图像
 date: 2021-5-11 09:45:04
-categories: 随记
+categories: 编程
 ----
 
 > 来源：https://developers.google.com/web/fundamentals/design-and-ux/responsive/images

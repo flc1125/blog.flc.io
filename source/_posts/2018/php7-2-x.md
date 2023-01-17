@@ -1,8 +1,9 @@
 ----
 title: PHP 各版本特性：PHP 7.2.x
 date: 2018-08-21 08:44:22
-categories: [后端]
-tags: PHP
+categories: 编程
+tags:
+- PHP
 toc: true
 ----
 

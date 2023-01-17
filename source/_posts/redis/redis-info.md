@@ -1,7 +1,7 @@
 ----
 title: Redis 配置统计字典：info 系统状态说明
 date: 2020-12-04 08:13
-categories: [后端]
+categories: 编程
 tags:
 - Redis
 - 笔记
@@ -19,17 +19,17 @@ toc: true
 **`info {section}`** 中的 **`{section}`** 包含如下：
 
 | **模块名{section}** | **模块含义** |
-| --- | --- |
-| server | 服务器信息 |
-| clients | 客户端信息 |
-| memory | 内存信息 |
-| persistence | 持久化信息 |
-| stats | 全局统计信息 |
-| replication | 主从复制信息 |
-| cpu | CPU 消耗信息 |
-| commandstats | 命令统计信息 |
-| cluster | 集群信息 |
-| keyspace | 数据库键统计信息 |
+|------------------|----------|
+| server           | 服务器信息    |
+| clients          | 客户端信息    |
+| memory           | 内存信息     |
+| persistence      | 持久化信息    |
+| stats            | 全局统计信息   |
+| replication      | 主从复制信息   |
+| cpu              | CPU 消耗信息 |
+| commandstats     | 命令统计信息   |
+| cluster          | 集群信息     |
+| keyspace         | 数据库键统计信息 |
 
 <!-- more -->
 

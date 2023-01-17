@@ -2,9 +2,10 @@
 title: 基于 goFrame 框架实现的留言板 Demo
 date: 2021-05-24 21:45:05
 updated: 2021-05-28 23:25:39
-categories: [后端]
+categories: 编程
 tags: 
 - Go
+- goFrame
 toc: true
 ----
 

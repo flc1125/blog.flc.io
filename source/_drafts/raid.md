@@ -1,8 +1,7 @@
 ----
 title: RAID XXXX
 date: 2021-3-17 14:21:31
-categories: 
-- [运维]
+categories:  编程
 tags: 
 - RAID
 toc: true

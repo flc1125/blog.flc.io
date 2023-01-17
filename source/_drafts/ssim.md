@@ -1,7 +1,7 @@
 ----
 title: 【整理中】图片质量指标 SSIM
 date: 2021-03-25 23:18:04
-categories: 思考
+categories: 编程
 tags: 
 - Go
 toc: true
