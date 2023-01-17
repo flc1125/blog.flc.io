@@ -1,7 +1,7 @@
 ----
 title: LeetCode：买卖股票的最佳时机
 date: 2021-5-7 12:39:40
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

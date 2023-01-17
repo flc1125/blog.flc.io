@@ -1,7 +1,7 @@
 ----
 title: LeetCode：最佳观光组合
 date: 2021-03-11 00:14:51
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

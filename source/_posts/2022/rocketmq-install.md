@@ -1,7 +1,11 @@
 ----
 title: RocketMQ 安装
 date: 2022-04-14 16:49:51
-categories: [编程,工具]
+categories: 编程
+tags:
+- 工具
+- RocketMQ
+- 消息队列
 ----
 
 > 此处基于 Macbook Pro 的安装演示

@@ -1,8 +1,8 @@
 ----
 title: 安装 Swoole 提示 openssl 相关报错处理
 date: 2021-4-1 15:47:23
-categories: [编程,后端]
-tags: 
+categories: 编程
+tags:
 - Swoole
 - PHP
 - OpenSSL

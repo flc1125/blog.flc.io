@@ -1,7 +1,7 @@
 ----
 title: LeetCode：从尾到头打印链表
 date: 2021-05-11 22:21:08
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

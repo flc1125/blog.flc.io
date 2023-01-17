@@ -1,7 +1,7 @@
 ----
 title: LeetCode：删除有序数组中的重复项 II
 date: 2021-04-06 22:57:30
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

@@ -1,8 +1,9 @@
 ----
 title: 通过 git subtree split 进行仓库拆分
 date: 2022-05-18 09:36:42
-categories: [编程,工具]
+categories: 编程
 tags:
+- 工具
 - Git
 toc: true
 ----

@@ -1,7 +1,7 @@
 ----
 title: LeetCode：用栈实现队列
 date: 2021-03-05 23:45:54
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

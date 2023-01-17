@@ -1,7 +1,7 @@
 ----
 title: LeetCode：字符串压缩
 date: 2021-06-28 23:02:55
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

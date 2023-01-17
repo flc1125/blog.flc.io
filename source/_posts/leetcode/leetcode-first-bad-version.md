@@ -1,7 +1,7 @@
 ----
 title: LeetCode：第一个错误的版本
 date: 2021-4-27 18:30:54
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

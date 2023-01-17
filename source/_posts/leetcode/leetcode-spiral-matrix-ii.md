@@ -1,7 +1,7 @@
 ----
 title: LeetCode：螺旋矩阵 II
 date: 2021-03-17 00:13:04
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

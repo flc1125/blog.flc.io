@@ -1,7 +1,7 @@
 ----
 title: LeetCode：翻转二叉树
 date: 2021-05-09 00:05:29
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

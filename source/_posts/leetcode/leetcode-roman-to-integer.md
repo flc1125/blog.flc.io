@@ -1,7 +1,7 @@
 ----
 title: LeetCode：罗马数字转整数
 date: 2021-03-12 00:12:59
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

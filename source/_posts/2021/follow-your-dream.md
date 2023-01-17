@@ -3,7 +3,9 @@ title: 纵令听其自然，世事的长河也还是要流往其应流的方向
 date: 2021-04-11 23:36:35
 updated: 2021-04-13 08:56:35
 cover: https://s.flc.io/2021-04-12-12-22-34.png
-categories: 随记
+categories: 生活
+tags:
+- 心情
 ----
 
 {% meting "004eabZ20VEGca" "tencent" "song" "autoplay" %}

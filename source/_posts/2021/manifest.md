@@ -2,8 +2,9 @@
 title: Web 应用程序清单 manifest
 date: 2021-04-13 23:29:41
 updated: 2021-04-14 23:21:30
-categories: [编程,前端]
-tags: 
+categories: 编程
+tags:
+- 前端
 - manifest
 - PWA
 toc: true

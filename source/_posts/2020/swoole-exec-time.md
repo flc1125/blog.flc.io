@@ -1,7 +1,7 @@
 ----
 title: Swoole 协程的思考-执行耗时
 date: 2020-08-21 10:52
-categories: [编程,后端]
+categories: [后端]
 tags: 
 - PHP
 - Swoole

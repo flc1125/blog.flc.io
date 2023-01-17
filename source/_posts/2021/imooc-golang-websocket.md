@@ -2,10 +2,10 @@
 title: 笔记：GO 实现千万级 WebSocket 消息推送服务
 date: 2021-05-24 21:45:05
 updated: 2021-05-28 23:25:39
-categories: [编程,后端]
+categories: 编程
 tags: 
 - Go
-- 笔记
+- WebSocket
 toc: true
 ----
 

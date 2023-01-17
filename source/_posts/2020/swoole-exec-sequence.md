@@ -1,7 +1,7 @@
 ----
 title: Swoole 协程的思考-执行顺序
 date: 2020-07-24 22:08
-categories: [编程,后端]
+categories: [后端]
 tags: 
 - PHP
 - Swoole

@@ -1,7 +1,7 @@
 ----
 title: LeetCode：判定是否互为字符重排
 date: 2021-06-08 21:35:45
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

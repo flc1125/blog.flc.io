@@ -1,7 +1,7 @@
 ----
 title: LeetCode： 移动零
 date: 2021-07-01 23:11:14
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

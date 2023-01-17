@@ -1,7 +1,7 @@
 ----
 title: LeetCode：爬楼梯
 date: 2021-03-12 23:55:21
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

@@ -1,7 +1,7 @@
 ----
 title: LeetCode：判断能否形成等差数列
 date: 2021-04-16 23:03:22
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

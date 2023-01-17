@@ -1,11 +1,11 @@
 ----
-title: 笔记：搭建并行处理管道，感受GO语言魅力
+title: 学习：搭建并行处理管道，感受 GO 语言魅力
 date: 2021-05-17 21:27:05
 updated: 2021-05-23 23:11:51
-categories: [编程,后端]
+categories: 编程
 tags: 
 - Go
-- 笔记
+- Channel
 toc: true
 ----
 

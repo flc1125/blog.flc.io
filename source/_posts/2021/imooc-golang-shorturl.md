@@ -1,11 +1,11 @@
 ----
-title: 笔记：Go开发短地址服务
+title: 笔记：Go 开发短网址服务
 date: 2021-05-31 22:42:13
 updated: 2021-06-07 00:23:33
-categories: [编程,后端]
-tags: 
+categories: 编程
+tags:
 - Go
-- 笔记
+- 短网址
 toc: true
 ----
 

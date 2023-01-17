@@ -3,11 +3,11 @@ title: Flag：使用 Go 语言完成 LeetCode 100 道题打卡
 date: 2021-03-17 00:25:48
 updated: 2021-9-13 09:46:04
 cover: https://s.flc.io/2021-03-17-00-29-32.png
-categories: [编程,后端]
+categories: 编程
 tags: 
-- Flag
 - Go
 - LeetCode
+- 打卡
 toc: true
 ----
 
@@ -16,6 +16,10 @@ toc: true
 很简单：巩固、熟练 Go 语言。
 
 ## 进度（59%）
+
+> 考虑目的，进度做到 50% 多的时候，就觉得意义不大，就停止了。  
+> 
+> **Flag 失败😑😑……**
 
 <!-- more -->
 

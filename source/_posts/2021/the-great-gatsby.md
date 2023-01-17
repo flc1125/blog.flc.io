@@ -3,10 +3,10 @@ title: 整理 《了不起的盖茨比》
 date: 2021-02-28 12:42:00
 updated: 2021-3-4 20:40:54
 cover: https://s.flc.io/2021-02-28-12-24-24.png
-categories: 
-- [随记]
-- [阅读]
-- [摘录]
+categories: 阅读
+tags:
+- 村上春树
+- 读书笔记
 toc: true
 ----
 

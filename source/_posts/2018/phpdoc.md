@@ -1,7 +1,7 @@
 ----
 title: PHPDoc 代码注释
 date: 2018-07-28 11:00:21
-categories: [编程,后端]
+categories: [后端]
 tags:
 - PHP
 - 规范

@@ -1,7 +1,10 @@
 ----
 title: SPM 淘宝-导购效果跟踪
 date: 2022-03-18 20:58:30
-categories: [编程,方案]
+categories: 编程
+tags:
+- SPM
+- 效果跟踪
 ----
 
 > 摘录为主

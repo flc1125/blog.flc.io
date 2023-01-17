@@ -1,7 +1,7 @@
 ----
 title: LeetCode：两数之和
 date: 2021-3-3 21:28:20
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

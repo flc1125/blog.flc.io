@@ -1,7 +1,7 @@
 ----
 title: LeetCode：搜索旋转排序数组 II
 date: 2021-04-07 21:19:32
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

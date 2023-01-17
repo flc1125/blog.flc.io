@@ -1,7 +1,9 @@
 ----
 title: 近况：大概就这么大
 date: 2021-06-09 23:36:52
-categories: 随记
+categories: 生活
+tags:
+- 心情
 ----
 
 近期“肺痨”，咳嗽严重。

@@ -1,7 +1,7 @@
 ----
 title: LeetCode：动物收容所
 date: 2021-04-22 22:39:37
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

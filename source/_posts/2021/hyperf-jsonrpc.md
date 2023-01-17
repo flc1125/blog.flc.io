@@ -1,10 +1,12 @@
 ----
 title: Hyperf：JSON-RPC 服务
 date: 2021-10-30 12:28:51
-categories: [编程,PHP]
+categories: 编程
 tags: 
+- PHP
 - Hyperf
 - JSON-RPC
+- RPC
 toc: true
 ----
 

@@ -1,7 +1,7 @@
 ----
 title: LeetCode：链表中倒数第 k 个节点
 date: 2021-07-02 23:05:36
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

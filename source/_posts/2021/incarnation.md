@@ -1,8 +1,9 @@
 ----
 title: 推荐：动漫《灵笼》
 date: 2021-05-09 13:42:07
-categories: 
-- [随记]
+categories: 生活
+tags:
+- 动漫
 ----
 
 ## 简介

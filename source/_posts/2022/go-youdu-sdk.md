@@ -1,10 +1,11 @@
 ----
 title: 有度 Golang 版 SDK
 date: 2022-07-07 08:54:58
-categories: [编程,Go]
+categories: 编程
 tags: 
 - Go
 - SDK
+- Youdu
 ----
 
 ## 地址

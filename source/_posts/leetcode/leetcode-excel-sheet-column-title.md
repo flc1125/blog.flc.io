@@ -1,7 +1,7 @@
 ----
 title: LeetCode：Excel 表列名称
 date: 2021-07-01 00:08:47
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

@@ -1,7 +1,7 @@
 ----
 title: LeetCode：最后一个单词的长度
 date: 2021-5-7 12:49:49
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

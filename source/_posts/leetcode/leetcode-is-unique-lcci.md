@@ -1,7 +1,7 @@
 ----
 title: LeetCode：判定字符是否唯一
 date: 2021-06-08 21:28:49
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

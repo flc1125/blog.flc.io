@@ -1,7 +1,7 @@
 ----
 title: LeetCode：LRU 缓存机制
 date: 2021-4-25 20:26:29
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

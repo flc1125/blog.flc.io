@@ -1,10 +1,9 @@
 ----
-title: 整理 《海边的卡夫卡》
+title: 《海边的卡夫卡》
 date: 2021-3-5 13:00:51
-categories: 
-- [阅读]
-- [摘录]
-tags: 
+categories: 阅读
+tags:
+- 读书笔记
 - 村上春树
 toc: true
 ----

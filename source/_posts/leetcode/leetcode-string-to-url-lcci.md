@@ -1,7 +1,7 @@
 ----
 title: LeetCode：URL化
 date: 2021-06-08 21:42:45
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

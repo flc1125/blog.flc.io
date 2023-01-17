@@ -1,7 +1,7 @@
 ----
 title: LeetCode：搜索插入位置（二分查找）
 date: 2021-04-26 23:15:25
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

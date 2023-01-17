@@ -1,7 +1,7 @@
 ----
 title: LeetCode：两数相加
 date: 2021-05-08 23:27:35
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode

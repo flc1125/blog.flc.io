@@ -1,7 +1,7 @@
 ----
 title: LeetCode：有序数组中出现次数超过25%的元素
 date: 2021-4-8 23:02:08
-categories: [编程,LeetCode]
+categories: LeetCode
 tags: 
 - Go
 - LeetCode
