@@ -1,7 +1,10 @@
 ----
 title: 心虽有所觉，但亦作不解
 date: 2019-12-02 23:33:33
-categories: 随记
+categories: 生活
+tags:
+- 心情
+- 随笔
 ----
 
 吴雨霏的《[吴哥窟](https://t3.kugou.com/song.html?id=u70WbcuQV2)》有段歌词：

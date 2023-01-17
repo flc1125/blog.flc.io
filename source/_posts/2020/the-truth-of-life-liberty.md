@@ -2,7 +2,9 @@
 title: 生活的真相 - 自由
 date: 2020-02-26 12:24:40
 updated: 2020-02-29 17:38:57
-categories: 随记
+categories: 生活
+tags:
+- 心情
 ----
 
 > 我想变成一棵树；  

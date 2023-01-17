@@ -1,8 +1,10 @@
 ----
 title: CDN 科普
 date: 2019-02-21 09:44:29
-categories: [后端]
-tags: CDN
+categories: 编程
+tags: 
+- CDN
+- 工具
 toc: true
 ----
 

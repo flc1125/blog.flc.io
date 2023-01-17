@@ -3,7 +3,10 @@ title: 死并非生的对立面，而作为生的一部永存
 date: 2019-10-18
 updated: 2019-10-23
 cover: https://s.flc.io/2021-03-03-00-14-03.png
-categories: 随记
+categories: 生活
+tags:
+- 心情
+- 村上春树
 ----
 
 > 死并非生的对立面，而作为生的一部永存 

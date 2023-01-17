@@ -1,7 +1,9 @@
 ----
 title: 向死而生
 date: 2019-12-14 09:55:47
-categories: 随记
+categories: 生活
+tags:
+- 心情
 ----
 
 向死而生——生命意义上的倒计时法。

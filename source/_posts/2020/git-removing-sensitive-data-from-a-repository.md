@@ -1,8 +1,10 @@
 ----
 title: GIT 从仓库中删除某文件及历史提交记录
 date: 2020-09-28 00:12
-categories: [工具]
-tags: Git
+categories: 编程
+tags: 
+- Git
+- 工具
 toc: true
 ----
 

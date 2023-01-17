@@ -1,7 +1,10 @@
 ----
-title: 最后的问题
+title: 【摘录】最后的问题
 date: 2019-10-28
-categories: 摘录
+categories: 阅读
+tags:
+- 读书笔记
+- 摘录
 ----
 
 > 本文转载自汪洁的《[星空的琴弦](https://book.douban.com/subject/27082359/)》的片段，而片段，则又是改编自阿西莫夫的《[最后的问题](https://book.douban.com/subject/4834737/)》。
