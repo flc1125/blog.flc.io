@@ -1,7 +1,7 @@
 ----
 title: 分享：B 站自由泳教程、UP主推荐
 date: 2021-04-11 09:59:22
-categories: 生活
+categories: 分享
 ----
 
 ## 课程
