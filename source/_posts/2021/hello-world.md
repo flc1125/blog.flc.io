@@ -3,6 +3,7 @@ title: 🎉 Hello World！博客迁移说明~
 date: 2021-02-28 13:18:08
 categories: 生活
 toc: true
+cover: https://s.flc.io/202301171621594.png!blog
 ----
 
 ## 迁移

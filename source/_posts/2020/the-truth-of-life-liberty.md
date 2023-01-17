@@ -5,6 +5,7 @@ updated: 2020-02-29 17:38:57
 categories: 生活
 tags:
 - 心情
+cover: https://s.flc.io/202301171625202.png!blog
 ----
 
 > 我想变成一棵树；  
