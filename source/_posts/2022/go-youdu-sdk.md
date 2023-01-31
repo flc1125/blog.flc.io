@@ -1,6 +1,7 @@
 ----
 title: 有度 Golang 版 SDK
 date: 2022-07-07 08:54:58
+cover: https://s.flc.io/202301310907195.png
 categories: 编程
 tags: 
 - Go

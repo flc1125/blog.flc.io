@@ -86,8 +86,7 @@ toc: true
     |`hits.hits._id`|文档所对应的文档ID|
     |`hits.hits._score`|文档根据匹配对的分值|
     |`hits.hits._source`|文档原始数据|
-    |更多...||
-
+    |更多...|     |
 
 ### 索引
 

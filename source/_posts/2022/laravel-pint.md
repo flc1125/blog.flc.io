@@ -1,6 +1,7 @@
 ----
 title: PHP 代码风格检测/修复工具：Laravel Pint
 date: 2022-06-30 15:06:00
+cover: https://s.flc.io/202301310905033.png!blog
 categories: 编程
 tags:
 - 工具
