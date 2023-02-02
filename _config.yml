@@ -48,7 +48,12 @@ index_generator:
   per_page: 25
   order_by: '-date'
 default_category: uncategorized
-category_map: null
+category_map:
+  分享: share
+  生活: life
+  阅读: reading
+  编程: developer
+  LeetCode: leetcode
 tag_map: null
 meta_generator: true
 date_format: YYYY-MM-DD
