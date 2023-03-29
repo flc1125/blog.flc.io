@@ -104,4 +104,4 @@ func main() {
 
 - PSR-3: Logger Interface：https://www.php-fig.org/psr/psr-3/
 - PSR Log：https://github.com/php-fig/log
-- Go Redis: https://github.com/redis/go-redis/（参考设计思路）
+- Go Redis: https://github.com/redis/go-redis/ （参考设计思路）
