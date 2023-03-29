@@ -24,6 +24,8 @@ tags:
 go get github.com/go-packagist/logger
 ```
 
+<!--more-->
+
 ## 教程
 
 ```go
