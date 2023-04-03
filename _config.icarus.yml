@@ -47,6 +47,7 @@ navbar:
         归档: /archives/
         分类: /categories/
         标签: /tags/
+        开源: /open-source/
         关于: /about/
     links:
         Download on GitHub:
