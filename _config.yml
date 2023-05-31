@@ -6,7 +6,7 @@ author: Flc
 language: zh-CN
 timezone: Asia/Shanghai
 url: https://flc.io/
-permalink: ':name'
+permalink: ':name/'
 permalink_defaults: null
 pretty_urls:
   trailing_index: true
