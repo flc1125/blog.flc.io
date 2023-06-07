@@ -1,6 +1,6 @@
 ----
 title: 2023-丽江游
-cover: https://s.flc.io/202305310847601.png!blog
+cover: https://s.flc.io/202306070852911.jpeg!blog
 date: 2023-05-31 08:43:07
 categories: 
     - 生活
@@ -22,19 +22,19 @@ categories:
 
 <div class="justified-gallery">
 
-![](https://s.flc.io/202305310849239.jpeg!blog)
+![](https://s.flc.io/202305310849239.jpeg)
 
-![](https://s.flc.io/202305310850014.jpeg!blog)
+![](https://s.flc.io/202305310850014.jpeg)
 
-![](https://s.flc.io/202305310850829.jpeg!blog)
+![](https://s.flc.io/202305310850829.jpeg)
 
-![](https://s.flc.io/202305310850591.jpeg!blog)
+![](https://s.flc.io/202305310850591.jpeg)
 
-![](https://s.flc.io/202305310850743.jpeg!blog)
+![](https://s.flc.io/202305310850743.jpeg)
 
-![](https://s.flc.io/202305310851451.jpeg!blog)
+![](https://s.flc.io/202305310851451.jpeg)
 
-![](https://s.flc.io/202305310851782.jpeg!blog)
+![](https://s.flc.io/202305310851782.jpeg)
 
 ![](https://s.flc.io/202305310852322.jpeg)
 
