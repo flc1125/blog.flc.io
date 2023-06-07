@@ -1,5 +1,5 @@
 ----
-title: 2023-丽江游[Draft]
+title: 2023-丽江游
 cover: https://s.flc.io/202305310847601.png!blog
 date: 2023-05-31 08:43:07
 categories: 
@@ -68,4 +68,57 @@ categories:
 
 ![](https://s.flc.io/202305310858973.jpeg)
 
+![](https://s.flc.io/202306070844663.jpeg)
+
+![](https://s.flc.io/202306070841448.jpeg)
+
+![](https://s.flc.io/202306070843810.jpeg)
+
+![](https://s.flc.io/202306070843873.jpeg)
+
+![](https://s.flc.io/202306070843798.jpeg)
+
+![](https://s.flc.io/202306070844493.jpeg)
+
 </div>
+
+
+### D3
+
+<div class="justified-gallery">
+
+![](https://s.flc.io/202306070845250.jpeg)
+
+![](https://s.flc.io/202306070845395.jpeg)
+
+![](https://s.flc.io/202306070845377.jpeg)
+
+![](https://s.flc.io/202306070846001.jpeg)
+
+![](https://s.flc.io/202306070846722.jpeg)
+
+![金沙江](https://s.flc.io/202306070846988.jpeg)
+
+![金沙江](https://s.flc.io/202306070847472.jpeg)
+
+![泸沽湖](https://s.flc.io/202306070847705.jpeg)
+
+![泸沽湖](https://s.flc.io/202306070847221.jpeg)
+
+![泸沽湖](https://s.flc.io/202306070848247.jpeg)
+
+![民宿-牧云](https://s.flc.io/202306070848593.jpeg)
+
+</div>
+
+### D4
+
+<div class="justified-gallery">
+
+![](https://s.flc.io/202306070851604.jpeg)
+
+</div>
+
+### D5
+
+…… 没拍啥 ……
