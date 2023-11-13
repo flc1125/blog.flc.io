@@ -5,7 +5,7 @@ logo:
 head:
     favicon: /assets/images/favicon.ico
     manifest:
-        name: 叶子坑
+        name: Flc゛
         short_name: Flc
         start_url: "./?utm_source=web_app_manifest"
         theme_color: "green"
