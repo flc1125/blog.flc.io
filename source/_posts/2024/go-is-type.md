@@ -33,6 +33,8 @@ if IsType[int](v) {
 }
 ```
 
+<!--more-->
+
 ## 主角
 
 这就是今天要给大家分享的一个新方法：`IsType`。这个想法来自于 [关于增加 `is[T any](any) bool` 的提案](https://github.com/golang/go/issues/65846) 。
