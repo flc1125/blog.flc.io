@@ -6,6 +6,7 @@ categories:
 tags:
 - Go
 - type
+toc: true
 ----
 
 > 分享组件：[go-kratos-ecosystem/components](https://github.com/go-kratos-ecosystem/components)
@@ -180,7 +181,7 @@ func main() {
 }
 ```
 
-## 参考资料
+## 资料
 
 - [关于增加 `is[T any](any) bool` 的提案](https://github.com/golang/go/issues/65846)
 - [Go 1.18 泛型](https://golang.org/doc/go1.18#generics)
