@@ -11,7 +11,7 @@ toc: true
 
 > 分享组件：[go-kratos-ecosystem/components](https://github.com/go-kratos-ecosystem/components)
 > 
-> 注：该功能计划在 v2.11.0 版本中发布。
+> 注：该功能计划在 v2.11.0 版本中发布。[PR](https://github.com/go-kratos-ecosystem/components/pull/184)
 
 ## 引言
 
