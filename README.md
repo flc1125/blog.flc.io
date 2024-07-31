@@ -1,5 +1,7 @@
 # https://flc.io
 
+[![Deploy Site](https://github.com/flc1125/blog.flc.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/flc1125/blog.flc.io/actions/workflows/deploy.yml)
+
 个人博客，[博客说明](https://flc.io/hello-world/)
 
 ## Categories
@@ -39,4 +41,4 @@
 
 ## Powered by
 
-© 2017-2023 Flc
+© 2017-2024 Flc
