@@ -31,7 +31,7 @@ jobs:
 
       - name: Install Package
         run: |
-          npm install hexo-cli -g
+          npm install hexo-cli@7.3.0 -g
           npm install
 
       - name: Install Golang
