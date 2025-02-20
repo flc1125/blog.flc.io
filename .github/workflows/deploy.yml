@@ -58,7 +58,7 @@ jobs:
 
       - name: Build
         run: |
-          ./node_modules/.bin/hexo g
+          npm run build
 
       - name: Deploy
         run: |
