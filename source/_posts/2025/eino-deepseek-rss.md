@@ -181,6 +181,8 @@ Eino 的编排能力非常强大，通过 Eino 配合 RSS 实现每日简报功�
 
 至于最终的输出结构，可以自行优化 prompt。此处，仅仅为了展示简单的例子。
 
+在实际应用中，这个逻辑可以简单的封装成一个 Agent，而我们只需要关系带入的 RSS 链接即可。
+
 ## 参考
 
 - [Eino](https://github.com/cloudwego/eino)
