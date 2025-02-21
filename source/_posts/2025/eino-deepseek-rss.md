@@ -147,7 +147,7 @@ type weatherResult struct {
 }
 
 func fetchWeather(t *testing.T) string {
-	resp, err := http.Get("https://restapi.amap.com/v3/weather/weatherInfo?key=[key]&city=440300&extensions=base") // 此处使用的是高德 API（有免费额度），地址：https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#t1
+	resp, err := http.Get("https://restapi.amap.com/v3/weather/weatherInfo?key=[key]&city=440300&extensions=base") // 此处使用的是高德 API（有免费额度），此处使用的是深圳天气，实际应用，可自定义城市编码，或者做个映射关系。附 API 地址：https://lbs.amap.com/api/webservice/guide/api/weatherinfo/#t1
 	require.NoError(t, err)
 	defer resp.Body.Close()
 
