@@ -50,7 +50,7 @@ jobs:
       - name: Install Upx
         if: steps.cache-upx.outputs.cache-hit != 'true'
         run: |
-          go get -u github.com/upyun/upx@v0.3.6
+          go install github.com/upyun/upx@v0.3.6
 
       - name: Login Upx
         run: |
