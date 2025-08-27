@@ -1,7 +1,7 @@
 ----
 title: "Go 中 sync.Pool 存储 *[]T vs []T 的性能对比研究"
 cover: https://s.flc.io/202508271936971.png!blog
-date: 2025-08-27
+date: 2025-08-27 19:40:40
 categories:
 - 编程
 toc: true
