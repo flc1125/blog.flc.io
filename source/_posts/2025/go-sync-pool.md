@@ -10,6 +10,8 @@ tags:
 - Benchmark
 ----
 
+背景：之前提交了一个功能，维护者后将一部分代码优化成[如此](https://github.com/open-telemetry/opentelemetry-go/blob/3342341f15081be03d23b3e36b9e2c07ffca858a/exporters/stdout/stdouttrace/trace.go#L102-L129)，印象中返回具体类型性能会更好，想验证为什么需要返回使用指针。
+
 直接上代码：
 
 ```go
