@@ -10,7 +10,11 @@ tags:
 - Benchmark
 ----
 
-背景：之前提交了一个功能，维护者后将一部分代码优化成[如此](https://github.com/open-telemetry/opentelemetry-go/blob/3342341f15081be03d23b3e36b9e2c07ffca858a/exporters/stdout/stdouttrace/trace.go#L102-L129)，印象中返回具体类型性能会更好，想验证为什么需要返回使用指针。
+## 背景
+
+之前提交了一个功能，维护者后将一部分代码优化成[如此](https://github.com/open-telemetry/opentelemetry-go/blob/3342341f15081be03d23b3e36b9e2c07ffca858a/exporters/stdout/stdouttrace/trace.go#L102-L129)，印象中返回具体类型性能会更好，想验证为什么需要返回使用指针。
+
+## 研究
 
 直接上代码：
 
@@ -191,7 +195,7 @@ PASS
 
 ![](https://s.flc.io/202508271936971.png)
 
-**结果：**
+## 结论
 
 - 指针的的操作因为无分配，所以无额外的内存分配，但会存在 CPU 运算。
 - 但指针的操作在小切片中表现不错；在大切片中 CPU 性能损耗超越内存分配带来的性能损耗，大切片下适合P2方法。
