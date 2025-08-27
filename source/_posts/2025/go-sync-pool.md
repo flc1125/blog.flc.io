@@ -83,11 +83,11 @@ BenchmarkAppendWithPool2
 BenchmarkAppendWithPool2-10    	 3828464	       309.8 ns/op	      24 B/op	       1 allocs/op
 ```
 
-从结果看：Pool2 会明显比 Pool 更快。但从理论上不符合预期，*sl = append(*sl, j) 的执行，因为指针解引用，按道理会有 CPU 的性能损耗。
+从结果看：Pool2 会明显比 Pool 更快。但从理论上不符合预期，`*sl = append(*sl, j)` 的执行，因为指针解引用，按道理会有 CPU 的性能损耗。
 
 ---
 
-继续研究：将 appendN 改为 3，结局令人意外，性能反转：
+继续研究：将 `appendN` 改为 3，结局令人意外，性能反转：
 
 ```
 goos: darwin
