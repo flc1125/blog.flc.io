@@ -2,8 +2,7 @@
 title: "屏蔽 MacOS 的系统升级"
 cover: https://s.flc.io/202510201324449.png!blog
 date: 2025-10-20
-categories:
-- 生活
+categories: 分享
 tags:
 - MacOS
 ----
