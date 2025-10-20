@@ -1,7 +1,7 @@
 ----
 title: LeetCode：回文排列
 date: 2021-06-09 23:56:32
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

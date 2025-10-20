@@ -1,7 +1,7 @@
 ----
 title: LeetCode：移除元素
 date: 2021-04-19 22:22:09
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

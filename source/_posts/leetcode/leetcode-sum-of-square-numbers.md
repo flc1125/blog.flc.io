@@ -1,7 +1,7 @@
 ----
 title: LeetCode：平方数之和
 date: 2021-03-25 23:06:38
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

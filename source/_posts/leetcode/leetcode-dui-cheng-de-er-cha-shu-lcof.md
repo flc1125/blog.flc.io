@@ -1,7 +1,7 @@
 ----
 title: LeetCode：对称的二叉树
 date: 2021-05-12 23:03:42
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

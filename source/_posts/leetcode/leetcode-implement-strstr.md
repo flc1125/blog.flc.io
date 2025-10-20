@@ -1,7 +1,7 @@
 ----
 title: LeetCode：实现 strStr()
 date: 2021-04-20 23:12:15
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

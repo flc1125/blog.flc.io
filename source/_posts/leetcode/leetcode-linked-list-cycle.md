@@ -1,7 +1,7 @@
 ----
 title: LeetCode：环形链表（快慢指针）
 date: 2021-5-7 19:47:38
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

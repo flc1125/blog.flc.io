@@ -1,7 +1,7 @@
 ----
 title: LeetCode：目标和
 date: 2021-06-07 23:46:42
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

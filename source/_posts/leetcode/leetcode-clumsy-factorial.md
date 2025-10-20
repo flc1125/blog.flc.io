@@ -1,7 +1,7 @@
 ----
 title: LeetCode：笨阶乘
 date: 2021-04-02 00:17:39
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

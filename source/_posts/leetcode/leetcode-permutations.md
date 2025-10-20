@@ -1,7 +1,7 @@
 ----
 title: LeetCode：全排列
 date: 2021-06-29 23:50:37
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

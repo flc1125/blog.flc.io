@@ -1,7 +1,7 @@
 ----
 title: LeetCode：查找常用字符
 date: 2021-5-7 14:25:27
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

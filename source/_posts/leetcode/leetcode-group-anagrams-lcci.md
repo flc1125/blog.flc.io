@@ -1,7 +1,7 @@
 ----
 title: LeetCode：变位词组
 date: 2021-3-29 14:04:04
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

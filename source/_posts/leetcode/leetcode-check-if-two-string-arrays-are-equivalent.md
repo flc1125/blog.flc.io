@@ -1,7 +1,7 @@
 ----
 title: LeetCode：检查两个字符串数组是否相等
 date: 2021-04-02 23:40:39
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

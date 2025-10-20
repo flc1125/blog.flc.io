@@ -1,7 +1,7 @@
 ----
 title: LeetCode：有序数组中的单一元素
 date: 2021-04-23 22:54:32
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

@@ -1,7 +1,7 @@
 ----
 title: LeetCode：回文数
 date: 2021-05-14 23:55:48
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

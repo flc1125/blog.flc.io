@@ -1,7 +1,7 @@
 ----
 title: LeetCode：前 K 个高频元素
 date: 2021-04-22 00:30:18
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

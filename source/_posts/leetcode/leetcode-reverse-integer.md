@@ -1,7 +1,7 @@
 ----
 title: LeetCode：整数反转
 date: 2021-03-27 01:02:54
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode

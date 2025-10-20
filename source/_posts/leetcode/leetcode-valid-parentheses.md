@@ -2,7 +2,7 @@
 title: LeetCode：有效的括号
 date: 2021-04-28 23:18:21
 updated: 2021-04-30 00:07:52
-categories: LeetCode
+categories: 编程
 tags: 
 - Go
 - LeetCode
