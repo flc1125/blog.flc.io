@@ -34,4 +34,4 @@ sudo killall -HUP mDNSResponder
 
 ## 一些其他方法
 
-By ChatGPT: https://chatgpt.com/s/t_68f5c829432881918d0a11a86f6647ac
+By ChatGPT: https://chatgpt.com/s/t_68f5cd78bb988191861465df6ac40193
