@@ -59,6 +59,9 @@ footer:
         GitHub:
             icon: fab fa-github
             url: 'https://github.com/flc1125'
+        Mail:
+            icon: fas fa-envelope
+            url: "mailto:i@flc.io"
         RSS:
             icon: fas fa-rss
             url: /atom.xml
@@ -125,6 +128,9 @@ widgets:
             Docs:
                 icon: fa fa-book
                 url: 'https://docs.flc.io'
+            Mail:
+                icon: fas fa-envelope
+                url: "mailto:i@flc.io"
             RSS:
                 icon: fas fa-rss
                 url: /atom.xml
