@@ -133,9 +133,9 @@
                     <!-- Tab -->
                     <div class="bg-slate-100 p-1 rounded-lg flex shrink-0">
                         <button @click="currentTab = 'stock'"
-                                class="px-4 py-2 rounded-md text-sm font-medium transition-all"
+                                class="px-4 py-2 rounded-md text-sm font-medium transition-all flex items-center gap-1"
                                 :class="currentTab === 'stock' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'">
-                            库存中
+                            库存中 <span class="text-xs bg-slate-200 px-1.5 rounded-full">{{ stockCount }}</span>
                         </button>
                         <button @click="currentTab = 'depleted'"
                                 class="px-4 py-2 rounded-md text-sm font-medium transition-all flex items-center gap-1"
@@ -581,6 +581,14 @@
             });
 
             const depletedCount = computed(() => filaments.value.filter(f => f.remaining === 0).length);
+            const stockCount = computed(() => {
+                const list = filaments.value.filter(f => f.remaining > 0);
+                if (isGrouped.value) {
+                    const uniqueKeys = new Set(list.map(item => `${item.brand}|${item.type}|${item.colorHex}|${item.colorName}`));
+                    return uniqueKeys.size;
+                }
+                return list.length;
+            });
             const currentPresets = computed(() => PRESETS[presetCategory.value] || []);
 
             // 交互方法
@@ -672,7 +680,7 @@
 
             return {
                 user, configError, authLoading, loadErrorMessage, loadErrorTitle, searchQuery,
-                currentTab, isGrouped, displayList, depletedCount,
+                currentTab, isGrouped, displayList, depletedCount, stockCount,
                 showModal, isEditing, form, saving, currentPresets, presetCategory,
                 showGroupModal, currentGroup, handleCardClick, editItemFromGroup, duplicateItem,
                 login, logout, openModal, editItem, closeModal, saveItem, deleteItem,
