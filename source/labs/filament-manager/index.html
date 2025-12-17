@@ -64,8 +64,6 @@
                     <div v-if="user" class="flex items-center gap-3">
                         <div class="hidden md:flex flex-col items-end mr-2">
                             <span class="text-sm font-medium text-slate-700">{{ user.displayName }}</span>
-                            <!-- 这里的统计改为基于当前Tab -->
-                            <span class="text-xs text-slate-500">{{ currentTab === 'stock' ? '库存' : '历史' }}: {{ displayList.length }} 项</span>
                         </div>
                         <img :src="user.photoURL" class="h-9 w-9 rounded-full border border-slate-200" alt="Avatar">
                         <button @click="logout" class="p-2 text-slate-400 hover:text-red-500 transition-colors" title="退出登录">
