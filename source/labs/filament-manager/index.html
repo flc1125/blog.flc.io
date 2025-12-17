@@ -292,7 +292,7 @@
                         </select>
                     </div>
                     <div class="grid grid-cols-8 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
-                        <div v-for="color in currentPresets" :key="color.hex" @click="applyPreset(color)"
+                        <div v-for="color in currentPresets" :key="color.hex" @click="applyPreset(color, presetCategory)"
                              class="group relative cursor-pointer flex flex-col items-center">
                             <div class="w-8 h-8 rounded-full shadow-sm border border-slate-200 color-dot ring-2 ring-transparent group-hover:ring-slate-300"
                                  :style="{ backgroundColor: color.hex }" :title="color.name"></div>
@@ -619,9 +619,9 @@
                 };
             };
 
-            const applyPreset = (preset) => {
+            const applyPreset = (preset, category) => {
                 form.value.brand = "Bambu Lab";
-                form.value.type = presetCategory.value;
+                form.value.type = category;
                 form.value.colorName = preset.name;
                 form.value.colorHex = preset.hex;
             };
