@@ -54,7 +54,10 @@
                     <div class="bg-green-500 text-white p-1.5 rounded-lg">
                         <i class="ph-bold ph-spool text-xl"></i>
                     </div>
-                    <span class="font-bold text-lg tracking-tight text-slate-800">Filament<span class="text-green-600">Manager</span></span>
+                    <div>
+                        <div class="font-bold text-lg leading-none text-slate-800">不焦虑耗材</div>
+                        <div class="text-[10px] text-green-600 font-bold tracking-widest uppercase mt-0.5">3D Printing</div>
+                    </div>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -257,6 +260,14 @@
             </div>
         </div>
     </main>
+
+    <footer class="py-8 text-center">
+        <div class="inline-flex items-center gap-2 text-slate-300 text-xs font-medium uppercase tracking-widest">
+            <span>© 2025 不焦虑耗材</span>
+            <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+            <span>Designed for Gemini&FLC</span>
+        </div>
+    </footer>
 
     <!-- 主编辑 Modal (单卷) -->
     <div v-if="showModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4" @click.self="closeModal">
