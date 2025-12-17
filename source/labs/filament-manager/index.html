@@ -204,7 +204,7 @@
                 <!-- 循环渲染列表 -->
                 <div v-for="item in displayList" :key="item.id || item.groupId"
                      @click="handleCardClick(item)"
-                     class="filament-swatch relative group rounded-2xl overflow-visible cursor-pointer shadow-sm bg-white aspect-[4/5] flex flex-col z-0"
+                     class="filament-swatch relative group rounded-2xl overflow-visible cursor-pointer shadow-sm bg-white aspect-[3/4] md:aspect-[4/5] flex flex-col z-0"
                      :class="{'group-stack': item.isGroup}">
 
                     <!-- 颜色展示区 -->
