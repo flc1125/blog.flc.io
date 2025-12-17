@@ -348,9 +348,15 @@
                     </div>
                     <p class="text-xs text-slate-400" v-if="form.remaining === 0">⚠️ 保存后将移入“已耗尽”列表</p>
                 </div>
-                <div class="space-y-1.5">
-                    <label class="text-xs font-bold text-slate-500 uppercase">备注</label>
-                    <input v-model="form.note" type="text" class="w-full bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="例如：AMS 插槽 1">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase">购买日期</label>
+                        <input v-model="form.purchaseDate" type="date" class="w-full bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase">备注</label>
+                        <input v-model="form.note" type="text" class="w-full bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="例如：AMS 插槽 1">
+                    </div>
                 </div>
             </div>
             <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
@@ -635,6 +641,7 @@
                     colorName: templateItem.colorName,
                     colorHex: templateItem.colorHex,
                     remaining: 100,
+                    purchaseDate: new Date().toISOString().split('T')[0],
                     note: ''
                 };
             };
@@ -651,7 +658,15 @@
 
             const openModal = () => {
                 isEditing.value = false;
-                form.value = { brand: 'Bambu Lab', type: 'PLA Basic', colorName: 'Bambu Green', colorHex: '#00AE42', remaining: 100, note: '' };
+                form.value = { 
+                    brand: 'Bambu Lab', 
+                    type: 'PLA Basic', 
+                    colorName: 'Bambu Green', 
+                    colorHex: '#00AE42', 
+                    remaining: 100, 
+                    purchaseDate: new Date().toISOString().split('T')[0],
+                    note: '' 
+                };
                 presetCategory.value = "PLA Basic";
                 showModal.value = true;
             };
