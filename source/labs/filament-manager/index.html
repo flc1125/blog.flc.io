@@ -131,12 +131,12 @@
                     <!-- Tab -->
                     <div class="bg-slate-100 p-1 rounded-lg flex shrink-0">
                         <button @click="currentTab = 'stock'"
-                                class="px-4 py-2 rounded-md text-sm font-medium transition-all active:scale-95 flex items-center gap-1"
+                                class="px-4 py-2 rounded-md text-sm font-medium transition-all flex items-center gap-1"
                                 :class="currentTab === 'stock' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'">
                             库存中 <span class="text-xs bg-slate-200 px-1.5 rounded-full">{{ stockCount }}</span>
                         </button>
                         <button @click="currentTab = 'depleted'"
-                                class="px-4 py-2 rounded-md text-sm font-medium transition-all active:scale-95 flex items-center gap-1"
+                                class="px-4 py-2 rounded-md text-sm font-medium transition-all flex items-center gap-1"
                                 :class="currentTab === 'depleted' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-700'">
                             已耗尽 <span class="text-xs bg-slate-200 px-1.5 rounded-full">{{ depletedCount }}</span>
                         </button>
@@ -195,7 +195,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
 
                 <!-- 新增卡片 (仅库存Tab显示) -->
-                <div v-if="currentTab === 'stock' && !searchQuery" @click="openModal()" class="cursor-pointer border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center text-slate-400 hover:text-green-600 hover:border-green-300 hover:bg-green-50/50 transition-all active:scale-[0.98] min-h-[220px] group">
+                <div v-if="currentTab === 'stock' && !searchQuery" @click="openModal()" class="cursor-pointer border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center text-slate-400 hover:text-green-600 hover:border-green-300 hover:bg-green-50/50 transition-all min-h-[220px] group">
                     <div class="w-12 h-12 rounded-full bg-slate-100 group-hover:bg-green-100 flex items-center justify-center mb-2 transition-colors">
                         <i class="ph-bold ph-plus text-xl"></i>
                     </div>
@@ -205,7 +205,7 @@
                 <!-- 循环渲染列表 -->
                 <div v-for="item in displayList" :key="item.id || item.groupId"
                      @click="handleCardClick(item)"
-                     class="filament-swatch relative group rounded-2xl overflow-visible cursor-pointer shadow-sm bg-white aspect-[4/5] flex flex-col z-0 active:scale-[0.98]"
+                     class="filament-swatch relative group rounded-2xl overflow-visible cursor-pointer shadow-sm bg-white aspect-[4/5] flex flex-col z-0"
                      :class="{'group-stack': item.isGroup}">
 
                     <!-- 颜色展示区 -->
@@ -272,7 +272,7 @@
                             </div>
                             <!-- 进度条 -->
                             <div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                                <div class="h-full rounded-full transition-all duration-500 ease-out"
+                                <div class="h-full rounded-full"
                                      :class="item.isGroup ? 'bg-slate-800' : getProgressBarColor(item.remaining)"
                                      :style="{ width: item.isGroup ? '100%' : item.remaining + '%' }"></div>
                             </div>
@@ -422,7 +422,7 @@
                     </div>
                     <div class="flex items-center gap-3">
                         <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
-                            <div class="h-full rounded-full transition-all duration-500 ease-out" :class="getProgressBarColor(item.remaining)" :style="{ width: item.remaining + '%' }"></div>
+                            <div class="h-full rounded-full" :class="getProgressBarColor(item.remaining)" :style="{ width: item.remaining + '%' }"></div>
                         </div>
                         <i class="ph-bold ph-pencil-simple text-slate-300 group-hover:text-green-500"></i>
                     </div>
