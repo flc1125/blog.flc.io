@@ -142,7 +142,7 @@
                         </button>
                     </div>
 
-                    <!-- 筛选下拉框 -->
+                    <!-- 筛选下拉框 (Brand & Type) -->
                     <div class="flex gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
                         <select v-model="filterBrand" class="bg-white border border-slate-200 text-slate-600 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2 outline-none shadow-sm">
                             <option value="ALL">所有品牌</option>
@@ -160,6 +160,17 @@
                         <input v-model="searchQuery" type="text" placeholder="搜索颜色、材质..."
                                class="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all shadow-sm">
                     </div>
+
+                    <div class="hidden sm:block w-px h-6 bg-slate-200 mx-1 self-center"></div>
+
+                    <!-- 排序下拉框 -->
+                    <select v-model="sortBy" class="bg-white border border-slate-200 text-slate-600 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2 outline-none shadow-sm">
+                        <option value="default">默认排序</option>
+                        <option value="purchase_desc">购买时间 (新→旧)</option>
+                        <option value="purchase_asc">购买时间 (旧→新)</option>
+                        <option value="remaining_asc">剩余量 (少→多)</option>
+                        <option value="remaining_desc">剩余量 (多→少)</option>
+                    </select>
                 </div>
 
                 <!-- 右侧：聚合开关 + 添加按钮 -->
@@ -494,6 +505,7 @@
             const searchQuery = ref('');
             const filterBrand = ref('ALL');
             const filterType = ref('ALL');
+            const sortBy = ref('default');
 
             // 界面状态
             const currentTab = ref('stock'); // 'stock' | 'depleted'
@@ -572,7 +584,25 @@
                     return true;
                 });
 
-                // 2. 聚合逻辑 (仅在 'stock' tab 且 开启聚合时)
+                // 2. 排序逻辑
+                if (sortBy.value !== 'default') {
+                    list.sort((a, b) => {
+                        if (sortBy.value === 'purchase_desc') {
+                            return (b.purchaseDate || '').localeCompare(a.purchaseDate || '');
+                        }
+                        if (sortBy.value === 'purchase_asc') {
+                            // 把无日期的放到最后
+                            if (!a.purchaseDate) return 1;
+                            if (!b.purchaseDate) return -1;
+                            return a.purchaseDate.localeCompare(b.purchaseDate);
+                        }
+                        if (sortBy.value === 'remaining_asc') return a.remaining - b.remaining;
+                        if (sortBy.value === 'remaining_desc') return b.remaining - a.remaining;
+                        return 0;
+                    });
+                }
+
+                // 3. 聚合逻辑 (仅在 'stock' tab 且 开启聚合时)
                 if (currentTab.value === 'stock' && isGrouped.value && !searchQuery.value) {
                     const groups = {};
                     const result = [];
@@ -730,7 +760,7 @@
 
             return {
                 user, configError, authLoading, loadErrorMessage, loadErrorTitle, searchQuery,
-                filterBrand, filterType, uniqueBrands, uniqueTypes,
+                filterBrand, filterType, uniqueBrands, uniqueTypes, sortBy,
                 currentTab, isGrouped, displayList, depletedCount, stockCount,
                 showModal, isEditing, form, saving, currentPresets, presetCategory,
                 showGroupModal, currentGroup, handleCardClick, editItemFromGroup, duplicateItem,
