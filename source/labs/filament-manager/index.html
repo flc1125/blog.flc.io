@@ -142,6 +142,18 @@
                         </button>
                     </div>
 
+                    <!-- 筛选下拉框 -->
+                    <div class="flex gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+                        <select v-model="filterBrand" class="bg-white border border-slate-200 text-slate-600 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2 outline-none shadow-sm">
+                            <option value="ALL">所有品牌</option>
+                            <option v-for="b in uniqueBrands" :key="b" :value="b">{{ b }}</option>
+                        </select>
+                        <select v-model="filterType" class="bg-white border border-slate-200 text-slate-600 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block p-2 outline-none shadow-sm">
+                            <option value="ALL">所有材质</option>
+                            <option v-for="t in uniqueTypes" :key="t" :value="t">{{ t }}</option>
+                        </select>
+                    </div>
+
                     <!-- 搜索 -->
                     <div class="relative w-full sm:w-64 group">
                         <i class="ph-bold ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-green-500"></i>
@@ -466,6 +478,8 @@
             const loadErrorMessage = ref('');
             const loadErrorTitle = ref('');
             const searchQuery = ref('');
+            const filterBrand = ref('ALL');
+            const filterType = ref('ALL');
 
             // 界面状态
             const currentTab = ref('stock'); // 'stock' | 'depleted'
@@ -529,6 +543,10 @@
                     if (currentTab.value === 'stock' && isDepleted) return false;
                     if (currentTab.value === 'depleted' && !isDepleted) return false;
 
+                    // 筛选过滤
+                    if (filterBrand.value !== 'ALL' && item.brand !== filterBrand.value) return false;
+                    if (filterType.value !== 'ALL' && item.type !== filterType.value) return false;
+
                     // 搜索过滤
                     if (searchQuery.value) {
                         const q = searchQuery.value.toLowerCase();
@@ -579,6 +597,8 @@
             });
 
             const depletedCount = computed(() => filaments.value.filter(f => f.remaining === 0).length);
+            const uniqueBrands = computed(() => [...new Set(filaments.value.map(f => f.brand))].sort());
+            const uniqueTypes = computed(() => [...new Set(filaments.value.map(f => f.type))].sort());
             const stockCount = computed(() => {
                 const list = filaments.value.filter(f => f.remaining > 0);
                 if (isGrouped.value) {
@@ -678,6 +698,7 @@
 
             return {
                 user, configError, authLoading, loadErrorMessage, loadErrorTitle, searchQuery,
+                filterBrand, filterType, uniqueBrands, uniqueTypes,
                 currentTab, isGrouped, displayList, depletedCount, stockCount,
                 showModal, isEditing, form, saving, currentPresets, presetCategory,
                 showGroupModal, currentGroup, handleCardClick, editItemFromGroup, duplicateItem,
