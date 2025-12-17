@@ -241,7 +241,15 @@
                     <div class="bg-white p-3 border-t border-slate-100 flex flex-col justify-between h-[30%] rounded-b-2xl relative z-10">
                         <div class="flex justify-between items-center">
                             <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide bg-slate-100 px-1.5 py-0.5 rounded">{{ item.type }}</span>
-                            <span class="text-xs text-slate-400 font-mono">{{ item.colorHex.toUpperCase() }}</span>
+                            <span class="text-xs text-slate-400 text-right">
+                                <template v-if="item.purchaseDate">
+                                    <span class="font-medium group-hover:hidden">{{ timeAgo(item.purchaseDate) }}</span>
+                                    <span class="hidden group-hover:inline font-mono">{{ item.colorHex.toUpperCase() }}</span>
+                                </template>
+                                <template v-else>
+                                    <span class="font-mono">{{ item.colorHex.toUpperCase() }}</span>
+                                </template>
+                            </span>
                         </div>
 
                         <!-- 底部数据展示 -->
@@ -711,6 +719,15 @@
 
             const getProgressBarColor = (val) => val <= 10 ? 'bg-red-500' : (val <= 30 ? 'bg-amber-400' : 'bg-green-500');
 
+            const timeAgo = (dateStr) => {
+                if (!dateStr) return '';
+                const diff = (new Date() - new Date(dateStr)) / (1000 * 60 * 60 * 24);
+                if (diff < 1) return '今天';
+                if (diff < 30) return Math.floor(diff) + '天前';
+                if (diff < 365) return Math.floor(diff / 30) + '个月前';
+                return Math.floor(diff / 365) + '年前';
+            };
+
             return {
                 user, configError, authLoading, loadErrorMessage, loadErrorTitle, searchQuery,
                 filterBrand, filterType, uniqueBrands, uniqueTypes,
@@ -718,7 +735,7 @@
                 showModal, isEditing, form, saving, currentPresets, presetCategory,
                 showGroupModal, currentGroup, handleCardClick, editItemFromGroup, duplicateItem,
                 login, logout, openModal, editItem, closeModal, saveItem, deleteItem,
-                getContrastColor, getProgressBarColor, applyPreset
+                getContrastColor, getProgressBarColor, applyPreset, timeAgo
             };
         }
     });
