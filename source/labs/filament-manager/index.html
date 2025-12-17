@@ -632,9 +632,8 @@
                         }
                     });
 
-                    // 如果某组只有1个，是否拆开显示？为了统一交互，这里设定：即便是1个，如果开启聚合，也保持聚合样式（方便添加同类），或者还原。
-                    // 这里为了UI一致性，我们把 count=1 的还原成普通 item
-                    return result.map(g => g.count === 1 ? g.items[0] : g);
+                    // 统一返回 Group 对象，即使只有1个元素，也保持 Group 结构，以保证交互一致性
+                    return result;
                 }
 
                 return list;
