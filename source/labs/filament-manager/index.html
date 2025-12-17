@@ -319,6 +319,7 @@
                             <option value="PLA CF">PLA CF</option>
                             <option value="PETG Basic">PETG Basic</option>
                             <option value="ABS">ABS</option>
+                            <option value="ASA">ASA</option>
                             <option value="TPU 95A HF">TPU 95A HF</option>
                         </select>
                     </div>
@@ -460,34 +461,38 @@
 
     const PRESETS = {
         "PLA Basic": [
-            { name: "Bambu Green · 拓竹绿", hex: "#00AE42" }, { name: "Jade White · 玉石白", hex: "#FFFFFF" }, { name: "Black · 黑色", hex: "#000000" },
-            { name: "Orange · 橙色", hex: "#FF6A13" }, { name: "Yellow · 黄色", hex: "#FACC21" }, { name: "Red · 红色", hex: "#C8102E" },
-            { name: "Blue · 蓝色", hex: "#005EB8" }, { name: "Magenta · 品红", hex: "#EC008C" }, { name: "Cyan · 青色", hex: "#00AEEF" },
-            { name: "Purple · 紫色", hex: "#622599" }, { name: "Gray · 灰色", hex: "#8D9496" }, { name: "Silver · 银色", hex: "#A5A5A5" },
-            { name: "Gold · 金色", hex: "#D4AF37" }, { name: "Bronze · 青铜色", hex: "#CD7F32" }, { name: "Beige · 米色", hex: "#F5F5DC" }
+            { name: "Jade White · 翡翠白", hex: "#F6F6F6" }, { name: "Black · 碳黑", hex: "#161616" }, { name: "Bambu Green · 拓竹绿", hex: "#00AE42" },
+            { name: "Red · 深红", hex: "#C21A1A" }, { name: "Orange · 橙色", hex: "#FF8835" }, { name: "Yellow · 黄色", hex: "#FCE83A" },
+            { name: "Blue · 深蓝", hex: "#00358E" }, { name: "Magenta · 品红", hex: "#E4006D" }, { name: "Purple · 紫色", hex: "#5F1B68" },
+            { name: "Cyan · 青色", hex: "#009E9F" }, { name: "Beige · 米色", hex: "#E0CFA7" }, { name: "Silver · 银色", hex: "#A7A9AC" },
+            { name: "Gold · 金色", hex: "#E2C485" }, { name: "Bronze · 青铜色", hex: "#7C6E56" }, { name: "Gray · 灰色", hex: "#8C8C8C" }
         ],
         "PLA Matte": [
-            { name: "Matte Charcoal · 哑光炭黑", hex: "#292C2F" }, { name: "Matte Ivory White · 哑光象牙白", hex: "#F2F2F2" }, { name: "Matte Dark Red · 哑光暗红", hex: "#7D252D" },
-            { name: "Matte Marine Blue · 哑光海蓝", hex: "#1D324F" }, { name: "Matte Ice Blue · 哑光冰蓝", hex: "#8AAAC3" }, { name: "Matte Grass Green · 哑光草绿", hex: "#638953" },
-            { name: "Matte Sakura Pink · 哑光樱花粉", hex: "#F3D5DE" }, { name: "Matte Lemon Yellow · 哑光柠檬黄", hex: "#FCE588" }, { name: "Matte Desert Tan · 哑光沙色", hex: "#C6B287" },
-            { name: "Matte Lilac Purple · 哑光丁香紫", hex: "#BCA7E8" }
+            { name: "Ivory White · 象牙白", hex: "#EBEBEB" }, { name: "Charcoal Black · 炭黑", hex: "#222222" }, { name: "Scarlet Red · 绯红", hex: "#B82336" },
+            { name: "Mandarin Orange · 柑橘橙", hex: "#FA9C50" }, { name: "Lemon Yellow · 柠檬黄", hex: "#F7D648" }, { name: "Grass Green · 草绿", hex: "#4B7F42" },
+            { name: "Marine Blue · 海蓝", hex: "#004873" }, { name: "Lilac Purple · 丁香紫", hex: "#7C6991" }, { name: "Sakura Pink · 樱花粉", hex: "#F0A7B5" },
+            { name: "Ice Blue · 冰蓝", hex: "#90C2DB" }, { name: "Latte Brown · 拿铁棕", hex: "#8F6C55" }, { name: "Desert Tan · 沙漠黄", hex: "#C9B696" },
+            { name: "Dark Gray · 深灰", hex: "#575757" }, { name: "Ash Grey · 灰白", hex: "#A3A8AE" }
         ],
         "PLA Silk": [
-            { name: "Silk Gold · 丝绸金", hex: "#E6C200" }, { name: "Silk Silver · 丝绸银", hex: "#C0C0C0" }, { name: "Silk Copper · 丝绸铜", hex: "#B87333" },
-            { name: "Silk Blue · 丝绸蓝", hex: "#007FFF" }, { name: "Silk Red · 丝绸红", hex: "#FF3333" }, { name: "Silk Dual Green/Blue · 丝绸绿蓝双色", hex: "#008080" }
+            { name: "Silk Silver · 丝绸银", hex: "#D1D5D9" }, { name: "Silk Gold · 丝绸金", hex: "#E5BF6A" }, { name: "Silk Copper · 丝绸铜", hex: "#B57451" },
+            { name: "Silk Red · 丝绸红", hex: "#D12828" }, { name: "Silk Blue · 丝绸蓝", hex: "#005CB9" }, { name: "Silk Green · 丝绸绿", hex: "#009E45" }
         ],
         "PLA CF": [
             { name: "PLA-CF Black · PLA-CF 黑色", hex: "#1A1A1A" }, { name: "PLA-CF Burgundy Red · PLA-CF 酒红", hex: "#5D2126" },
             { name: "PLA-CF Jeans Blue · PLA-CF 牛仔蓝", hex: "#253646" }, { name: "PLA-CF Lava Gray · PLA-CF 岩浆灰", hex: "#595959" }
         ],
         "PETG Basic": [
-            { name: "Black · 黑色", hex: "#121212" }, { name: "White · 白色", hex: "#F8F9FA" }, { name: "Gray · 灰色", hex: "#7A7F85" },
-            { name: "Red · 红色", hex: "#B71C1C" }, { name: "Blue · 蓝色", hex: "#1565C0" }, { name: "Orange · 橙色", hex: "#E65100" },
-            { name: "Yellow · 黄色", hex: "#F9A825" }, { name: "Transparent · 透明", hex: "#E0E0E0" }
+            { name: "White · 白色", hex: "#F6F6F6" }, { name: "Black · 黑色", hex: "#121212" }, { name: "Gray · 灰色", hex: "#8C8C8C" },
+            { name: "Blue · 蓝色", hex: "#003896" }, { name: "Red · 红色", hex: "#C21A1A" }, { name: "Orange · 橙色", hex: "#FF8835" },
+            { name: "Yellow · 黄色", hex: "#FCE83A" }, { name: "Silver · 银色", hex: "#A7A9AC" }
         ],
         "ABS": [
-            { name: "Black · 黑色", hex: "#1A1A1A" }, { name: "White · 白色", hex: "#FAFAFA" }, { name: "Red · 红色", hex: "#B71C1C" },
-            { name: "Blue · 蓝色", hex: "#0D47A1" }, { name: "Gray · 灰色", hex: "#616161" }, { name: "Orange · 橙色", hex: "#FF6F00" }
+            { name: "White · 白色", hex: "#F6F6F6" }, { name: "Black · 黑色", hex: "#121212" }, { name: "Red · 红色", hex: "#C21A1A" },
+            { name: "Orange · 橙色", hex: "#FF8835" }, { name: "Blue · 蓝色", hex: "#00358E" }
+        ],
+        "ASA": [
+            { name: "White · 白色", hex: "#F6F6F6" }, { name: "Black · 黑色", hex: "#121212" }
         ],
         "TPU 95A HF": [
             { name: "Black · 黑色", hex: "#111111" }, { name: "White · 白色", hex: "#FEFEFE" }, { name: "Red · 红色", hex: "#D32F2F" }
