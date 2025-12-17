@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>拓竹耗材库存管理 (v6 聚合与归档版)</title>
+    <title>拓竹耗材库存管理 (v7 最终稳定版)</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Phosphor Icons -->
@@ -38,7 +38,8 @@
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
-        [v-cloak] { display: none; }
+        /* 🔴 修复 FOUC：强制隐藏未编译的模板 */
+        [v-cloak] { display: none !important; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
