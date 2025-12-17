@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拓竹耗材库存管理 (v5 索引优化版)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
+        .filament-swatch { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .filament-swatch:hover { transform: translateY(-4px); box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+
+        /* 预设颜色圆点动画 */
+        .color-dot { transition: transform 0.2s, ring-width 0.2s; }
+        .color-dot:hover { transform: scale(1.1); }
+        .color-dot:active { transform: scale(0.95); }
+
+        /* 自定义滚动条 */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+<div id="app" v-cloak class="min-h-screen flex flex-col">
+
+    <!-- 顶部导航 -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="bg-green-500 text-white p-1.5 rounded-lg">
+                        <i class="ph-bold ph-spool text-xl"></i>
+                    </div>
+                    <span class="font-bold text-lg tracking-tight text-slate-800">Filament<span class="text-green-600">Manager</span></span>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <div v-if="user" class="flex items-center gap-3">
+                        <div class="hidden md:flex flex-col items-end mr-2">
+                            <span class="text-sm font-medium text-slate-700">{{ user.displayName }}</span>
+                            <span class="text-xs text-slate-500">库存: {{ filteredFilaments.length }} 卷</span>
+                        </div>
+                        <img :src="user.photoURL" class="h-9 w-9 rounded-full border border-slate-200" alt="Avatar">
+                        <button @click="logout" class="p-2 text-slate-400 hover:text-red-500 transition-colors" title="退出登录">
+                            <i class="ph-bold ph-sign-out text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- 未配置提示 -->
+        <div v-if="configError" class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-r-lg">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="ph-fill ph-warning-circle text-red-500 text-xl"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-red-700">
+                        请在代码中配置 Firebase 信息。打开此 HTML 文件源码，找到 <code>firebaseConfig</code> 并填入你的项目配置。
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔴 智能错误提示 (Updated!) -->
+        <div v-if="loadErrorMessage" class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded-r-lg animate-fade-in">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <i class="ph-fill ph-info text-amber-500 text-xl"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-bold text-amber-800">{{ loadErrorTitle || '提示' }}</h3>
+                    <div class="mt-1 text-sm text-amber-700">
+                        <p>{{ loadErrorMessage }}</p>
+                        <!-- 如果是索引构建中，显示一个加载条 -->
+                        <div v-if="loadErrorMessage.includes('构建')" class="mt-2 flex items-center gap-2">
+                            <div class="animate-spin h-4 w-4 border-2 border-amber-600 border-t-transparent rounded-full"></div>
+                            <span class="text-xs text-amber-600">后台处理中，请稍候...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 登录界面 -->
+        <div v-if="!user && !authLoading" class="flex flex-col items-center justify-center min-h-[60vh] text-center animate-fade-in">
+            <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6 text-green-600">
+                <i class="ph-duotone ph-cube text-5xl"></i>
+            </div>
+            <h1 class="text-3xl font-bold text-slate-900 mb-3">管理你的 3D 打印耗材</h1>
+            <p class="text-slate-500 max-w-md mb-8">支持拓竹与第三方耗材。直观的色卡墙视图，精确记录每一克剩余库存。</p>
+
+            <button @click="login" class="flex items-center gap-3 bg-white border border-slate-300 hover:border-slate-400 hover:bg-slate-50 text-slate-700 px-8 py-3 rounded-xl font-medium shadow-sm transition-all transform active:scale-95">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-6 h-6">
+                使用 Google 账号登录
+            </button>
+        </div>
+
+        <!-- 加载中 -->
+        <div v-if="authLoading" class="flex justify-center items-center min-h-[60vh]">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+        </div>
+
+        <!-- 库存管理界面 -->
+        <div v-if="user">
+
+            <!-- 工具栏 -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4">
+                <!-- 搜索/筛选 -->
+                <div class="relative w-full sm:w-72 group">
+                    <i class="ph-bold ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-green-500"></i>
+                    <input v-model="searchQuery" type="text" placeholder="搜索颜色、材质或品牌..."
+                           class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all shadow-sm">
+                </div>
+
+                <!-- 视图切换与添加 -->
+                <div class="flex gap-3 w-full sm:w-auto">
+                    <button @click="openModal()" class="flex-1 sm:flex-none justify-center flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-lg font-medium shadow-lg shadow-slate-900/20 transition-all active:scale-95">
+                        <i class="ph-bold ph-plus"></i>
+                        入库耗材
+                    </button>
+                </div>
+            </div>
+
+            <!-- 色卡墙 Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+                <!-- 新增卡片 (快捷入口) -->
+                <div @click="openModal()" class="cursor-pointer border-2 border-dashed border-slate-200 rounded-2xl flex flex-col items-center justify-center text-slate-400 hover:text-green-600 hover:border-green-300 hover:bg-green-50/50 transition-all min-h-[220px] group">
+                    <div class="w-12 h-12 rounded-full bg-slate-100 group-hover:bg-green-100 flex items-center justify-center mb-2 transition-colors">
+                        <i class="ph-bold ph-plus text-xl"></i>
+                    </div>
+                    <span class="text-sm font-medium">入库新耗材</span>
+                </div>
+
+                <!-- 耗材卡片 -->
+                <div v-for="item in filteredFilaments" :key="item.id" @click="editItem(item)"
+                     class="filament-swatch relative group rounded-2xl overflow-hidden cursor-pointer shadow-sm bg-white aspect-[4/5] flex flex-col">
+
+                    <!-- 颜色展示区 -->
+                    <div class="relative flex-grow w-full overflow-hidden" :style="{ backgroundColor: item.colorHex }">
+                        <!-- 剩余量遮罩 -->
+                        <div class="absolute inset-0 bg-white opacity-40 transition-all duration-700 ease-out"
+                             :style="{ transform: `translateY(${item.remaining}%)` }">
+                        </div>
+
+                        <!-- 纹理覆盖 -->
+                        <div class="absolute inset-0 opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMwMDAiLz4KPC9zdmc+')]"></div>
+
+                        <!-- 标签 -->
+                        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-bold tracking-wider uppercase shadow-sm text-slate-800">
+                            {{ item.brand }}
+                        </div>
+
+                        <!-- 警告标识 -->
+                        <div v-if="item.remaining <= 10" class="absolute top-3 right-3 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center shadow-md animate-pulse">
+                            <i class="ph-bold ph-warning text-xs"></i>
+                        </div>
+
+                        <!-- 中心颜色名 -->
+                        <div class="absolute inset-0 flex items-center justify-center p-4 text-center">
+                            <span class="font-bold text-lg leading-tight drop-shadow-md" :style="{ color: getContrastColor(item.colorHex) }">
+                                {{ item.colorName }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 信息区 -->
+                    <div class="bg-white p-3 border-t border-slate-100 flex flex-col justify-between h-[30%]">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide bg-slate-100 px-1.5 py-0.5 rounded">{{ item.type }}</span>
+                            <span class="text-xs text-slate-400 font-mono">{{ item.colorHex.toUpperCase() }}</span>
+                        </div>
+
+                        <div class="flex justify-between items-end mt-1">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-slate-400 uppercase">剩余</span>
+                                <span class="text-xl font-bold text-slate-800 leading-none">{{ item.remaining }}<small class="text-xs text-slate-400 font-normal">%</small></span>
+                            </div>
+                            <div class="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full rounded-full"
+                                     :class="getProgressBarColor(item.remaining)"
+                                     :style="{ width: item.remaining + '%' }"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 空状态 -->
+            <div v-if="filteredFilaments.length === 0 && !loadErrorMessage && searchQuery" class="text-center py-20 text-slate-400">
+                <i class="ph-duotone ph-magnifying-glass text-4xl mb-2"></i>
+                <p>没有找到匹配的耗材</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 弹窗 Modal -->
+    <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center p-4" @click.self="closeModal">
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"></div>
+
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden relative transform transition-all animate-fade-in-up flex flex-col max-h-[90vh]">
+
+            <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                <h3 class="text-lg font-bold text-slate-800">{{ isEditing ? '编辑耗材' : '入库新耗材' }}</h3>
+                <button @click="closeModal" class="text-slate-400 hover:text-slate-600 p-1 rounded-full hover:bg-slate-100 transition"><i class="ph-bold ph-x text-lg"></i></button>
+            </div>
+
+            <div class="p-6 space-y-5 overflow-y-auto">
+
+                <!-- 预设选择器 (New!) -->
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <label class="text-xs font-bold text-slate-500 uppercase">⚡ 快速填充 (Bambu Lab 官方色)</label>
+                        <select v-model="presetCategory" class="text-xs bg-slate-100 border-none rounded px-2 py-1 text-slate-600 focus:ring-0 cursor-pointer">
+                            <option value="PLA Basic">PLA Basic</option>
+                            <option value="PLA Matte">PLA Matte</option>
+                            <option value="PETG Basic">PETG Basic</option>
+                            <option value="ABS">ABS</option>
+                            <option value="ASA">ASA</option>
+                        </select>
+                    </div>
+                    <!-- 颜色圆点 Grid -->
+                    <div class="grid grid-cols-8 gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                        <div v-for="color in currentPresets" :key="color.hex"
+                             @click="applyPreset(color)"
+                             class="group relative cursor-pointer flex flex-col items-center">
+                            <!-- 圆点 -->
+                            <div class="w-8 h-8 rounded-full shadow-sm border border-slate-200 color-dot ring-2 ring-transparent group-hover:ring-slate-300"
+                                 :style="{ backgroundColor: color.hex }"
+                                 :title="color.name">
+                            </div>
+                            <!-- 选中指示器 -->
+                            <div v-if="form.colorHex.toLowerCase() === color.hex.toLowerCase()" class="absolute -top-1 -right-1 bg-green-500 text-white rounded-full w-3 h-3 border border-white"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="border-slate-100 border-dashed">
+
+                <!-- 品牌和材质 -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase">品牌</label>
+                        <div class="relative">
+                            <select v-model="form.brand" class="w-full appearance-none bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <option>Bambu Lab</option>
+                                <option>eSun</option>
+                                <option>PolyMaker</option>
+                                <option>Sunlu</option>
+                                <option>Kingroon</option>
+                                <option>Anycubic</option>
+                                <option>其他</option>
+                            </select>
+                            <i class="ph-bold ph-caret-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5">
+                        <label class="text-xs font-bold text-slate-500 uppercase">材质</label>
+                        <input v-model="form.type" list="materials" type="text" class="w-full bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="PLA Basic">
+                        <datalist id="materials">
+                            <option value="PLA Basic"></option>
+                            <option value="PLA Matte"></option>
+                            <option value="PETG Basic"></option>
+                            <option value="PETG HF"></option>
+                            <option value="ABS"></option>
+                            <option value="TPU 95A"></option>
+                            <option value="ASA"></option>
+                            <option value="PC"></option>
+                            <option value="PAHT-CF"></option>
+                        </datalist>
+                    </div>
+                </div>
+
+                <!-- 颜色信息 (支持手动改) -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-slate-500 uppercase">颜色微调 (可选)</label>
+                    <div class="flex gap-3">
+                        <div class="relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-lg shadow-sm border border-slate-200 group">
+                            <input type="color" v-model="form.colorHex" class="absolute -top-4 -left-4 w-20 h-20 cursor-pointer p-0 border-0">
+                        </div>
+                        <input v-model="form.colorName" type="text" class="flex-grow bg-slate-50 border border-slate-200 text-slate-700 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="颜色名称">
+                    </div>
+                </div>
+
+                <!-- 库存控制 -->
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3">
+                    <div class="flex justify-between items-center">
+                        <label class="text-xs font-bold text-slate-500 uppercase flex items-center gap-1">
+                            <i class="ph-fill ph-drop"></i> 剩余量
+                        </label>
+                        <span class="text-2xl font-black text-slate-800">{{ form.remaining }}%</span>
+                    </div>
+
+                    <input type="range" v-model.number="form.remaining" min="0" max="100" step="1"
+                           class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-green-600 hover:accent-green-500">
+
+                    <div class="flex justify-between gap-2">
+                        <button v-for="p in [100, 75, 50, 25, 10, 0]" :key="p" @click="form.remaining = p"
+                                class="flex-1 py-1.5 text-xs font-medium rounded border transition-colors"
+                                :class="form.remaining === p ? 'bg-green-600 text-white border-green-600' : 'bg-white text-slate-600 border-slate-200 hover:border-green-400'">
+                            {{ p == 0 ? '空' : p }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 备注 -->
+                <div class="space-y-1.5">
+                    <label class="text-xs font-bold text-slate-500 uppercase">备注 (位置/批次)</label>
+                    <input v-model="form.note" type="text" class="w-full bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="例如：AMS 插槽 1">
+                </div>
+            </div>
+
+            <!-- 底部按钮 -->
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
+                <button v-if="isEditing" @click="deleteItem" class="text-red-500 hover:text-red-700 text-sm font-medium px-2 py-2 flex items-center gap-1">
+                    <i class="ph-bold ph-trash"></i> 删除
+                </button>
+                <div v-else></div>
+
+                <div class="flex gap-3">
+                    <button @click="closeModal" class="px-5 py-2.5 rounded-lg text-slate-600 hover:bg-slate-200 font-medium transition-colors">取消</button>
+                    <button @click="saveItem" :disabled="saving" class="px-6 py-2.5 rounded-lg bg-green-600 text-white font-medium hover:bg-green-700 shadow-lg shadow-green-600/20 transition-all flex items-center gap-2 disabled:opacity-50">
+                        <span v-if="saving" class="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full"></span>
+                        {{ saving ? '保存中' : '保存' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Vue 3 & Firebase Logic -->
+<script type="module">
+    import { createApp, ref, computed, onMounted, watch } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+    import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, query, where, onSnapshot, serverTimestamp, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+    // 🔴 配置已填入
+    const firebaseConfig = {
+        apiKey: "AIzaSyC_wj4kiFP2wkMdBtUhAS-w-9tiYQJrNAQ",
+        authDomain: "filament-manager-841c4.firebaseapp.com",
+        projectId: "filament-manager-841c4",
+        storageBucket: "filament-manager-841c4.firebasestorage.app",
+        messagingSenderId: "397724533964",
+        appId: "1:397724533964:web:ee8fb919d57d8d17872e69",
+        measurementId: "G-FKRW4KDPPR"
+    };
+
+    // 拓竹官方预设数据
+    const PRESETS = {
+        "PLA Basic": [
+            { name: "Bambu Green", hex: "#00AE42" }, { name: "Black", hex: "#000000" }, { name: "White", hex: "#FFFFFF" },
+            { name: "Gray", hex: "#8D9496" }, { name: "Red", hex: "#C8102E" }, { name: "Blue", hex: "#005EB8" },
+            { name: "Orange", hex: "#FF6A13" }, { name: "Yellow", hex: "#FACC21" }, { name: "Purple", hex: "#6F2C91" },
+            { name: "Pink", hex: "#F49AC1" }, { name: "Silver", hex: "#A5A9B4" }, { name: "Gold", hex: "#9E8857" },
+            { name: "Bronze", hex: "#8E562E" }, { name: "Cyan", hex: "#00AEC7" }, { name: "Magenta", hex: "#D6006E" },
+            { name: "Jade White", hex: "#F3F6F4" }, { name: "Beige", hex: "#D6C6A6" }, { name: "Brown", hex: "#5C3D2E" },
+        ],
+        "PLA Matte": [
+            { name: "Matte Black", hex: "#292C2F" }, { name: "Matte White", hex: "#F2F2F2" }, { name: "Matte Dark Red", hex: "#7D252D" },
+            { name: "Matte Marine Blue", hex: "#1D324F" }, { name: "Matte Ice Blue", hex: "#8AAAC3" }, { name: "Matte Grass Green", hex: "#638953" },
+            { name: "Matte Lemon Yellow", hex: "#E9D267" }, { name: "Matte Mandarin Orange", hex: "#D8703E" }, { name: "Matte Sakura Pink", hex: "#D8A3A8" },
+            { name: "Matte Desert Tan", hex: "#AB927A" }, { name: "Matte Charcoal", hex: "#46484A" }, { name: "Matte Ivory White", hex: "#EBE8D8" },
+        ],
+        "PETG Basic": [
+            { name: "Black", hex: "#121212" }, { name: "White", hex: "#F8F9FA" }, { name: "Gray", hex: "#7A7F85" },
+            { name: "Red", hex: "#D11C28" }, { name: "Blue", hex: "#0062BD" }, { name: "Transparent", hex: "#E0E0E0" }, // 近似
+            { name: "Trans. Red", hex: "#E57373" }, { name: "Trans. Blue", hex: "#64B5F6" },
+        ],
+        "ABS": [
+            { name: "Black", hex: "#1A1A1A" }, { name: "White", hex: "#FAFAFA" }, { name: "Red", hex: "#B71C1C" },
+            { name: "Blue", hex: "#0D47A1" }, { name: "Gray", hex: "#757575" }, { name: "Purple", hex: "#7B1FA2" },
+        ],
+        "ASA": [
+            { name: "Black", hex: "#111111" }, { name: "White", hex: "#FFFFFF" }, { name: "Red", hex: "#C62828" },
+            { name: "Blue", hex: "#1565C0" }, { name: "Natural", hex: "#F5F5DC" },
+        ]
+    };
+
+    const app = createApp({
+        setup() {
+            // 状态
+            const user = ref(null);
+            const filaments = ref([]);
+            const authLoading = ref(true);
+            const configError = ref(false);
+            const loadErrorMessage = ref(''); // 🔴 新增错误状态
+            const loadErrorTitle = ref(''); // 🔴 新增错误标题
+            const searchQuery = ref('');
+
+            // Modal 状态
+            const showModal = ref(false);
+            const isEditing = ref(false);
+            const saving = ref(false);
+            const editingId = ref(null);
+            const presetCategory = ref("PLA Basic");
+
+            const form = ref({
+                brand: 'Bambu Lab',
+                type: 'PLA Basic',
+                colorName: 'Bambu Green',
+                colorHex: '#00AE42',
+                remaining: 100,
+                note: ''
+            });
+
+            // 初始化 Firebase
+            let auth, db, googleProvider;
+            try {
+                if (!firebaseConfig.apiKey) {
+                    configError.value = true;
+                    authLoading.value = false;
+                } else {
+                    const firebaseApp = initializeApp(firebaseConfig);
+                    auth = getAuth(firebaseApp);
+                    db = getFirestore(firebaseApp);
+                    googleProvider = new GoogleAuthProvider();
+
+                    onAuthStateChanged(auth, (u) => {
+                        user.value = u;
+                        authLoading.value = false;
+                        if (u) loadFilaments(u.uid);
+                        else filaments.value = [];
+                    });
+                }
+            } catch (e) {
+                console.error("Firebase Init Error", e);
+                configError.value = true;
+            }
+
+            // 加载数据
+            const loadFilaments = (uid) => {
+                loadErrorMessage.value = ''; // 清除旧错误
+                const q = query(
+                        collection(db, 'filaments'),
+                        where("uid", "==", uid),
+                        orderBy("updatedAt", "desc")
+                );
+                onSnapshot(q, (snapshot) => {
+                    filaments.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                }, (error) => {
+                    console.error("Load Error:", error);
+                    // 🔴 智能错误分析
+                    if (error.code === 'permission-denied') {
+                        loadErrorTitle.value = "权限不足";
+                        loadErrorMessage.value = "请检查 Firebase 控制台的 Firestore Rules 是否配置正确。";
+                    } else if (error.message.includes('index')) {
+                        loadErrorTitle.value = "正在构建数据库索引";
+                        loadErrorMessage.value = "Firestore 正在为您的查询构建索引 (Index)。这是首次使用时的正常过程，通常需要 2-5 分钟。构建完成后数据会自动显示，请稍候...";
+                    } else {
+                        loadErrorTitle.value = "加载错误";
+                        loadErrorMessage.value = error.message;
+                    }
+                });
+            };
+
+            // 计算属性
+            const filteredFilaments = computed(() => {
+                if (!searchQuery.value) return filaments.value;
+                const lower = searchQuery.value.toLowerCase();
+                return filaments.value.filter(f =>
+                        f.colorName.toLowerCase().includes(lower) ||
+                        f.brand.toLowerCase().includes(lower) ||
+                        f.type.toLowerCase().includes(lower) ||
+                        (f.note && f.note.toLowerCase().includes(lower))
+                );
+            });
+
+            const currentPresets = computed(() => {
+                return PRESETS[presetCategory.value] || [];
+            });
+
+            // 方法
+            const applyPreset = (preset) => {
+                form.value.brand = "Bambu Lab";
+                form.value.type = presetCategory.value;
+                form.value.colorName = preset.name;
+                form.value.colorHex = preset.hex;
+            };
+
+            const login = async () => {
+                try { await signInWithPopup(auth, googleProvider); } catch (e) { alert("登录失败: " + e.message); }
+            };
+            const logout = () => signOut(auth);
+
+            const openModal = () => {
+                isEditing.value = false;
+                form.value = { brand: 'Bambu Lab', type: 'PLA Basic', colorName: 'Bambu Green', colorHex: '#00AE42', remaining: 100, note: '' };
+                presetCategory.value = "PLA Basic";
+                showModal.value = true;
+            };
+
+            const editItem = (item) => {
+                isEditing.value = true;
+                editingId.value = item.id;
+                form.value = { ...item };
+                if (PRESETS[item.type]) {
+                    presetCategory.value = item.type;
+                }
+                showModal.value = true;
+            };
+
+            const closeModal = () => { showModal.value = false; editingId.value = null; };
+
+            const saveItem = async () => {
+                if (!user.value) return;
+                saving.value = true;
+
+                const data = { ...form.value, uid: user.value.uid, updatedAt: serverTimestamp() };
+
+                try {
+                    const timeout = new Promise((_, reject) =>
+                            setTimeout(() => reject(new Error("网络请求超时 (10秒)。请检查您的网络连接是否允许连接 Google Firestore 数据库。")), 10000)
+                    );
+
+                    const dbRequest = isEditing.value && editingId.value
+                            ? updateDoc(doc(db, 'filaments', editingId.value), data)
+                            : addDoc(collection(db, 'filaments'), data);
+
+                    await Promise.race([dbRequest, timeout]);
+
+                    closeModal();
+                } catch (e) {
+                    console.error(e);
+                    let msg = e.message;
+                    if (msg.includes("permission-denied")) msg = "权限被拒绝：请检查 Firebase 控制台的 Firestore Rules 是否配置正确。";
+                    if (msg.includes("not-found")) msg = "数据库未找到：请前往 Firebase 控制台点击 'Create Database' 创建 Firestore 数据库。";
+
+                    alert("保存失败:\n" + msg);
+                } finally {
+                    saving.value = false;
+                }
+            };
+
+            const deleteItem = async () => {
+                if (!confirm("确定要删除这卷耗材吗？")) return;
+                try {
+                    await deleteDoc(doc(db, 'filaments', editingId.value));
+                    closeModal();
+                } catch (e) {
+                    alert("删除失败: " + e.message);
+                }
+            };
+
+            const getContrastColor = (hex) => {
+                if (!hex) return '#000';
+                const r = parseInt(hex.slice(1, 3), 16);
+                const g = parseInt(hex.slice(3, 5), 16);
+                const b = parseInt(hex.slice(5, 7), 16);
+                const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+                return yiq >= 128 ? '#1e293b' : '#ffffff';
+            };
+
+            const getProgressBarColor = (val) => {
+                if (val <= 10) return 'bg-red-500';
+                if (val <= 30) return 'bg-amber-400';
+                return 'bg-green-500';
+            };
+
+            return {
+                user, configError, authLoading, loadErrorMessage, loadErrorTitle, filaments, filteredFilaments, searchQuery,
+                showModal, isEditing, form, saving, presetCategory, currentPresets,
+                login, logout, openModal, editItem, closeModal, saveItem, deleteItem,
+                getContrastColor, getProgressBarColor, applyPreset
+            };
+        }
+    });
+
+    app.mount('#app');
+</script>
+
+<style>
+    @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in { animation: fade-in 0.6s ease-out; }
+    @keyframes fade-in-up { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    .animate-fade-in-up { animation: fade-in-up 0.2s ease-out; }
+</style>
+
+</body>
+</html>

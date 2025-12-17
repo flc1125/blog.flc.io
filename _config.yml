@@ -9,8 +9,8 @@ url: https://flc.io/
 permalink: ':name/'
 permalink_defaults: null
 pretty_urls:
-  trailing_index: true
-  trailing_html: true
+    trailing_index: true
+    trailing_html: true
 source_dir: source
 public_dir: public
 tag_dir: tags
@@ -18,42 +18,43 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: ':lang'
-skip_render: null
+skip_render:
+    - filament-manager/index.html
 new_post_name: ':title.md'
 default_layout: post
 titlecase: false
 external_link:
-  enable: true
-  field: site
-  exclude: ''
+    enable: true
+    field: site
+    exclude: ''
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: true
-  line_number: true
-  auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
+    enable: true
+    line_number: true
+    auto_detect: false
+    tab_replace: ''
+    wrap: true
+    hljs: false
 prismjs:
-  enable: false
-  preprocess: true
-  line_number: true
-  tab_replace: ''
+    enable: false
+    preprocess: true
+    line_number: true
+    tab_replace: ''
 index_generator:
-  path: ''
-  per_page: 25
-  order_by: '-date'
+    path: ''
+    per_page: 25
+    order_by: '-date'
 default_category: uncategorized
 category_map:
-  分享: share
-  生活: life
-  阅读: reading
-  编程: developer
-  LeetCode: leetcode
+    分享: share
+    生活: life
+    阅读: reading
+    编程: developer
+    LeetCode: leetcode
 tag_map: null
 meta_generator: true
 date_format: YYYY-MM-DD
@@ -66,32 +67,32 @@ exclude: null
 ignore: null
 theme: icarus
 deploy:
-  type: ''
+    type: ''
 
 
 # Sitemap @see https://github.com/hexojs/hexo-generator-sitemap
 sitemap:
-  path: sitemap.xml
-  template: 
-  rel: false
-  tags: true
-  categories: true
+    path: sitemap.xml
+    template:
+    rel: false
+    tags: true
+    categories: true
 
 # Aplayer(https://github.com/MoePlayer/hexo-tag-aplayer/)
 aplayer:
-  meting: true
+    meting: true
 
 # RSS
 feed:
-  enable: true
-  type: atom
-  path: atom.xml
-  limit: 25
-  hub:
-  content:
-  content_limit: 99999
-  content_limit_delim: ' '
-  order_by: -date
-  icon: icon.png
-  autodiscovery: true
-  template:
+    enable: true
+    type: atom
+    path: atom.xml
+    limit: 25
+    hub:
+    content:
+    content_limit: 99999
+    content_limit_delim: ' '
+    order_by: -date
+    icon: icon.png
+    autodiscovery: true
+    template:
