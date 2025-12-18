@@ -219,9 +219,9 @@
 
                         <!-- 批量选择 Checkbox -->
                         <div v-if="isSelectionMode" class="absolute top-3 left-3 z-30">
-                            <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors bg-white"
-                                 :class="(item.isGroup ? item.items.every(i => selectedIds.has(i.id)) : selectedIds.has(item.id)) ? 'border-green-500 bg-green-500 text-white' : 'border-slate-300 text-transparent'">
-                                <i class="ph-bold ph-check text-sm"></i>
+                            <div class="w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all duration-200 shadow-md"
+                                 :class="(item.isGroup ? item.items.every(i => selectedIds.has(i.id)) : selectedIds.has(item.id)) ? 'border-green-500 bg-green-500 text-white scale-110' : 'border-slate-300 bg-white text-transparent hover:border-green-400 hover:text-green-500 hover:bg-green-50'">
+                                <i class="ph-bold ph-check text-base"></i>
                             </div>
                         </div>
 
@@ -343,7 +343,7 @@
                             <option value="PLA CF">PLA CF</option>
                             <option value="PETG Basic">PETG Basic</option>
                             <option value="ABS">ABS</option>
-                            <option value="ASA">ASA</option>
+                            <option value="ASA">ASA</option>:
                             <option value="TPU 95A HF">TPU 95A HF</option>
                         </select>
                     </div>
