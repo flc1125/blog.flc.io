@@ -527,6 +527,8 @@
 
             // Init Firebase
             let auth, db, googleProvider;
+            let unsubscribe = null; // 用于存储监听器的取消函数
+
             try {
                 if (!firebaseConfig.apiKey) {
                     configError.value = true;
@@ -539,8 +541,17 @@
                     onAuthStateChanged(auth, (u) => {
                         user.value = u;
                         authLoading.value = false;
-                        if (u) loadFilaments(u.uid);
-                        else filaments.value = [];
+                        if (u) {
+                            loadFilaments(u.uid);
+                        } else {
+                            // 退出登录：取消监听，清空数据
+                            if (unsubscribe) {
+                                unsubscribe();
+                                unsubscribe = null;
+                            }
+                            filaments.value = [];
+                            loadErrorMessage.value = ''; // 清除之前的错误信息
+                        }
                     });
                 }
             } catch (e) {
@@ -549,12 +560,19 @@
             }
 
             const loadFilaments = (uid) => {
+                // 每次加载前先取消旧的监听
+                if (unsubscribe) {
+                    unsubscribe();
+                    unsubscribe = null;
+                }
                 loadErrorMessage.value = '';
                 const q = query(collection(db, 'filaments'), where("uid", "==", uid), orderBy("updatedAt", "desc"));
-                onSnapshot(q, (snapshot) => {
+                unsubscribe = onSnapshot(q, (snapshot) => {
                     filaments.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 }, (error) => {
                     if (error.code === 'permission-denied') {
+                        // 忽略退出登录瞬间可能产生的权限错误
+                        if (!user.value) return; 
                         loadErrorTitle.value = "权限不足"; loadErrorMessage.value = "请检查 Firebase 控制台的 Firestore Rules 是否配置正确。";
                     } else if (error.message.includes('index')) {
                         loadErrorTitle.value = "正在构建数据库索引"; loadErrorMessage.value = "Firestore 正在为您的查询构建索引 (Index)，请稍候 2-5 分钟...";
