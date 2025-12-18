@@ -174,6 +174,13 @@
 
                 <!-- 右侧：聚合开关 + 添加按钮 -->
                 <div class="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-end">
+                    <!-- 批量管理按钮 -->
+                    <button @click="toggleSelectionMode"
+                            class="p-2 rounded-lg transition-colors flex items-center justify-center w-10 h-10"
+                            :class="isSelectionMode ? 'bg-slate-800 text-white' : 'bg-white border border-slate-200 text-slate-500 hover:text-slate-800 hover:border-slate-300'">
+                        <i class="ph-bold" :class="isSelectionMode ? 'ph-x' : 'ph-list-checks text-xl'"></i>
+                    </button>
+
                     <!-- 聚合开关 (仅在库存Tab显示) -->
                     <div v-if="currentTab === 'stock'" class="flex items-center gap-2 cursor-pointer select-none" @click="isGrouped = !isGrouped">
                         <div class="w-10 h-6 rounded-full transition-colors relative" :class="isGrouped ? 'bg-green-500' : 'bg-slate-200'">
@@ -205,10 +212,18 @@
                 <div v-for="item in displayList" :key="item.id || item.groupId"
                      @click="handleCardClick(item)"
                      class="filament-swatch relative group rounded-2xl overflow-visible cursor-pointer shadow-sm bg-white aspect-[3/4] md:aspect-[4/5] flex flex-col z-0"
-                     :class="{'group-stack': item.isGroup}">
+                     :class="[{'group-stack': item.isGroup}, (item.isGroup ? item.items.every(i => selectedIds.has(i.id)) : selectedIds.has(item.id)) ? 'ring-2 ring-green-500 ring-offset-2' : '']">
 
                     <!-- 颜色展示区 -->
                     <div class="relative flex-grow w-full overflow-hidden rounded-t-2xl" :style="{ backgroundColor: item.colorHex }">
+
+                        <!-- 批量选择 Checkbox -->
+                        <div v-if="isSelectionMode" class="absolute top-3 left-3 z-30">
+                            <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors bg-white"
+                                 :class="(item.isGroup ? item.items.every(i => selectedIds.has(i.id)) : selectedIds.has(item.id)) ? 'border-green-500 bg-green-500 text-white' : 'border-slate-300 text-transparent'">
+                                <i class="ph-bold ph-check text-sm"></i>
+                            </div>
+                        </div>
 
                         <!-- 聚合标记 Badge -->
                         <div v-if="item.isGroup" class="absolute top-3 right-3 bg-white/90 backdrop-blur text-slate-800 px-2 py-0.5 rounded-md text-xs font-bold shadow-sm z-20 flex items-center gap-1">
@@ -286,6 +301,15 @@
                 <p v-if="currentTab === 'stock'">库存为空或无匹配项</p>
                 <p v-else>没有已耗尽的历史记录</p>
             </div>
+        </div>
+
+        <!-- 底部浮动操作栏 -->
+        <div v-if="isSelectionMode && selectedIds.size > 0" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur border border-slate-200 shadow-2xl rounded-full px-6 py-3 flex items-center gap-4 animate-fade-in-up">
+            <span class="text-sm font-bold text-slate-700">已选 {{ selectedIds.size }} 项</span>
+            <div class="h-4 w-px bg-slate-200"></div>
+            <button @click="batchDelete" class="text-red-500 hover:text-red-600 font-medium text-sm flex items-center gap-1.5">
+                <i class="ph-bold ph-trash"></i> 删除
+            </button>
         </div>
     </main>
 
@@ -446,7 +470,7 @@
     import { createApp, ref, computed, onMounted, watch } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-    import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, query, where, onSnapshot, serverTimestamp, orderBy } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, query, where, onSnapshot, serverTimestamp, orderBy, writeBatch } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
     // 🔴 配置
     const firebaseConfig = {
@@ -520,6 +544,9 @@
             // 界面状态
             const currentTab = ref('stock'); // 'stock' | 'depleted'
             const isGrouped = ref(false);    // 聚合开关
+            const isSelectionMode = ref(false); // 批量选择模式
+            const selectedIds = ref(new Set()); // 选中的ID集合
+
             const showModal = ref(false);
             const showGroupModal = ref(false);
             const currentGroup = ref(null);  // 当前展开的聚合组
@@ -682,11 +709,57 @@
 
             // 交互方法
             const handleCardClick = (item) => {
+                if (isSelectionMode.value) {
+                    toggleItemSelection(item);
+                    return;
+                }
                 if (item.isGroup) {
                     currentGroup.value = item;
                     showGroupModal.value = true;
                 } else {
                     editItem(item);
+                }
+            };
+
+            const toggleSelectionMode = () => {
+                isSelectionMode.value = !isSelectionMode.value;
+                selectedIds.value.clear();
+            };
+
+            const toggleItemSelection = (item) => {
+                // 如果是聚合组，这里简化处理：暂不支持直接选中整个组进行删除（逻辑太复杂，需要删组内所有）
+                // 或者：选中组意味着选中组内所有ID
+                if (item.isGroup) {
+                    const allInGroup = item.items.map(i => i.id);
+                    const allSelected = allInGroup.every(id => selectedIds.value.has(id));
+                    if (allSelected) {
+                        allInGroup.forEach(id => selectedIds.value.delete(id));
+                    } else {
+                        allInGroup.forEach(id => selectedIds.value.add(id));
+                    }
+                } else {
+                    if (selectedIds.value.has(item.id)) selectedIds.value.delete(item.id);
+                    else selectedIds.value.add(item.id);
+                }
+            };
+
+            const batchDelete = async () => {
+                if (selectedIds.value.size === 0) return;
+                if (!confirm(`确定删除选中的 ${selectedIds.value.size} 项吗？`)) return;
+                
+                saving.value = true;
+                try {
+                    const batch = writeBatch(db);
+                    selectedIds.value.forEach(id => {
+                        batch.delete(doc(db, 'filaments', id));
+                    });
+                    await batch.commit();
+                    isSelectionMode.value = false;
+                    selectedIds.value.clear();
+                } catch (e) {
+                    alert("批量删除失败: " + e.message);
+                } finally {
+                    saving.value = false;
                 }
             };
 
@@ -789,6 +862,7 @@
                 user, configError, authLoading, loadErrorMessage, loadErrorTitle, searchQuery,
                 filterBrand, filterType, uniqueBrands, uniqueTypes, sortBy,
                 currentTab, isGrouped, displayList, depletedCount, stockCount,
+                isSelectionMode, selectedIds, toggleSelectionMode, toggleItemSelection, batchDelete,
                 showModal, isEditing, form, saving, currentPresets, presetCategory,
                 showGroupModal, currentGroup, handleCardClick, editItemFromGroup, duplicateItem,
                 login, logout, openModal, editItem, closeModal, saveItem, deleteItem,
