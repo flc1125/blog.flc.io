@@ -313,6 +313,7 @@
                         <label class="text-xs font-bold text-slate-500 uppercase">⚡ 快速填充</label>
                         <select v-model="presetCategory" class="text-xs bg-slate-100 border-none rounded px-2 py-1 text-slate-600 focus:ring-0 cursor-pointer">
                             <option value="PLA Basic">PLA Basic</option>
+                            <option value="PLA Lite">PLA Lite</option>
                             <option value="PLA Matte">PLA Matte</option>
                             <option value="PLA Silk">PLA Silk</option>
                             <option value="PLA CF">PLA CF</option>
@@ -346,7 +347,7 @@
                     <div class="space-y-1.5">
                         <label class="text-xs font-bold text-slate-500 uppercase">材质</label>
                         <input v-model="form.type" list="materials" class="w-full bg-slate-50 border border-slate-200 text-slate-700 py-2.5 px-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="PLA Basic">
-                        <datalist id="materials"><option value="PLA Basic"><option value="PLA Matte"><option value="PLA Silk"><option value="PLA CF"><option value="PETG Basic"><option value="ABS"><option value="ASA"><option value="TPU 95A HF"></datalist>
+                        <datalist id="materials"><option value="PLA Basic"><option value="PLA Lite"><option value="PLA Matte"><option value="PLA Silk"><option value="PLA CF"><option value="PETG Basic"><option value="ABS"><option value="ASA"><option value="TPU 95A HF"></datalist>
                     </div>
                 </div>
                 <div class="space-y-1.5">
@@ -465,6 +466,11 @@
             { name: "Blue · 深蓝", hex: "#00358E" }, { name: "Magenta · 品红", hex: "#E4006D" }, { name: "Purple · 紫色", hex: "#5F1B68" },
             { name: "Cyan · 青色", hex: "#009E9F" }, { name: "Beige · 米色", hex: "#E0CFA7" }, { name: "Silver · 银色", hex: "#A7A9AC" },
             { name: "Gold · 金色", hex: "#E2C485" }, { name: "Bronze · 青铜色", hex: "#7C6E56" }, { name: "Gray · 灰色", hex: "#8C8C8C" }
+        ],
+        "PLA Lite": [
+            { name: "White · 白色", hex: "#F8F8F8" }, { name: "Black · 黑色", hex: "#111111" }, { name: "Gray · 灰色", hex: "#A0A0A0" },
+            { name: "Red · 红色", hex: "#DD2222" }, { name: "Blue · 蓝色", hex: "#2222DD" }, { name: "Green · 绿色", hex: "#22DD22" },
+            { name: "Yellow · 黄色", hex: "#DDDD22" }, { name: "Orange · 橙色", hex: "#DD8822" }
         ],
         "PLA Matte": [
             { name: "Ivory White · 象牙白", hex: "#EBEBEB" }, { name: "Charcoal Black · 炭黑", hex: "#222222" }, { name: "Scarlet Red · 绯红", hex: "#B82336" },
