@@ -1,26 +1,33 @@
-# Filament Manager (v7)
+# Filament Manager (v2)
 
 ## Project Overview
-**Filament Manager** is a lightweight, single-page application (SPA) designed to help 3D printing enthusiasts manage their filament inventory. It allows users to track filament usage, organize rolls by color and brand, and monitor depleted stock.
+**Filament Manager (不焦虑耗材)** is a minimalist, visual-first web application designed to help 3D printing enthusiasts manage their filament inventory. It solves the problem of tracking numerous rolls by providing a visual "color wall" interface and estimating remaining stock.
 
-The application is built as a standalone HTML file containing all necessary logic, styling, and templates, making it extremely portable and easy to deploy.
+**Core Philosophy:**
+*   **No-Build:** Runs directly in the browser via ES Modules. No Node.js build steps required.
+*   **Serverless:** Powered by Google Firebase (Auth + Firestore) for backend services.
+*   **Visual-First:** Prioritizes visual representation (color, remaining levels) over text lists.
 
-## Architecture & Tech Stack
-This project utilizes a modern "No-Build" architecture, relying on browser-native ES Modules and CDNs.
+## Documentation
+*   [v2 Development Guide](docs/v2-开发文档.md) - Detailed technical architecture and feature guide.
+*   [v1 Requirements](docs/v1-需求文档.md) - Historical requirements.
 
-*   **Frontend Framework:** [Vue 3](https://vuejs.org/) (via ESM CDN) - Handles reactivity, state management, and UI rendering.
-*   **Styling:** [Tailwind CSS](https://tailwindcss.com/) (via CDN) - Utility-first CSS framework for rapid UI development.
-*   **Icons:** [Phosphor Icons](https://phosphoricons.com/) - Consistent and flexible icon family.
-*   **Backend & Auth:** [Google Firebase](https://firebase.google.com/) (v10.7.1)
-    *   **Authentication:** Google Sign-In.
-    *   **Database:** Cloud Firestore for real-time data sync and storage.
+## Tech Stack
+*   **Frontend:** Vue 3 (ESM Browser Build)
+*   **UI:** Tailwind CSS (CDN) + Phosphor Icons
+*   **Backend:** Google Firebase (Auth, Firestore)
+*   **Font:** Google Fonts (Inter)
 
 ## Key Features
-*   **Inventory Tracking:** Visual grid of filament rolls with color previews and remaining percentage bars.
+*   **Inventory Tracking:** Visual grid of filament rolls with dynamic background colors and contrast-aware text.
 *   **Smart Grouping:** Toggleable "Aggregate" view to group identical filaments (same brand/type/color) and estimate total stock.
-*   **History:** Separate tab for "Depleted" items.
-*   **Search & Filter:** Real-time search by color, brand, or material type.
-*   **Presets:** Quick-fill templates for common Bambu Lab and generic filament types (PLA, PETG, ABS, etc.).
+*   **Batch Management:** Selection mode to delete multiple items simultaneously.
+*   **Advanced Sorting & Filtering:** 
+    *   Sort by: Purchase Date, Remaining Stock.
+    *   Filter by: Brand, Material Type, Stock Status (In Stock/Depleted).
+*   **Real-time Search:** Instant search by color name, brand, material, or notes.
+*   **Presets:** One-click fill for Bambu Lab official colors (PLA, PETG, ABS, etc.).
+*   **Visual Polish:** Glassmorphism UI, stack effects for groups, and animated interactions.
 
 ## Data Model (Firestore)
 The application uses a `filaments` collection in Firestore with the following schema:
@@ -31,6 +38,7 @@ The application uses a `filaments` collection in Firestore with the following sc
 *   `colorName`: String (e.g., "Bambu Green")
 *   `colorHex`: String (Hex code for UI rendering)
 *   `remaining`: Number (0-100)
+*   `purchaseDate`: String (ISO date YYYY-MM-DD, Optional)
 *   `note`: String (Optional)
 *   `updatedAt`: Timestamp
 
@@ -38,48 +46,27 @@ The application uses a `filaments` collection in Firestore with the following sc
 
 ### Prerequisites
 *   A modern web browser (Chrome, Edge, Firefox, Safari).
-*   A simple local HTTP server (required because ES Modules via `file://` protocol are restricted by CORS policies).
+*   A local HTTP server (required for ES Modules).
 
 ### Running Locally
 1.  Navigate to the project directory:
     ```bash
     cd /Users/flc/data/www/blog.flc.io/source/labs/filament-manager
     ```
-2.  Start a local server. For example:
-    *   **Python 3:** `python3 -m http.server`
-    *   **Node.js (http-server):** `npx http-server`
-    *   **VS Code:** Use the "Live Server" extension.
-3.  Open the provided localhost URL (e.g., `http://localhost:8000`) in your browser.
+2.  Start a local server:
+    *   **Python:** `python3 -m http.server 8000`
+    *   **Node:** `npx http-server`
+3.  Open `http://localhost:8000`.
 
 ### Configuration
-The Firebase configuration is currently embedded directly in `index.html`.
-*   **API Key & Config:** Located in the `<script type="module">` block under `firebaseConfig`.
-*   **Security Note:** While Firebase API keys are generally safe to expose in client-side code (restricted by domain), ensure Firestore Security Rules are configured in the Firebase Console to prevent unauthorized access.
+Firebase configuration is embedded in `index.html`.
+*   **Security Rules:** Ensure Firestore rules allow read/write only for the authenticated user's `uid`.
+*   **Indexes:** Composite index required for `uid` (Asc) + `updatedAt` (Desc).
 
-#### Firestore Security Rules
-To ensure data isolation, deploy the following rules to your Firebase project:
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /filaments/{document} {
-      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
-      allow read, update, delete: if request.auth != null && resource.data.uid == request.auth.uid;
-    }
-  }
-}
-```
-
-#### Firestore Indexes
-The app uses compound queries (`uid` + `updatedAt`). If you encounter index errors, create the following composite index in Firestore:
-*   Collection: `filaments`
-*   Fields: `uid` (Ascending), `updatedAt` (Descending)
-
-### File Structure
-The project consists of a single file:
-*   `index.html`: Contains the HTML structure, CSS styles (custom & Tailwind), and Vue.js/Firebase JavaScript logic.
-
-## Roadmap (v1 Requirements)
-*   **Localization:** Change app title to "耗材管家".
-*   **Dashboard:** Add a statistical dashboard (Total Weight, Material Distribution).
-*   **Footer:** Add copyright info.
+## Roadmap (v2.x)
+- [x] **Core Features:** CRUD, Grouping, Batch Delete, Search/Sort.
+- [x] **Visuals:** Dark mode text adaptation, Stacking effects.
+- [ ] **Dashboard:** Statistical view (Total Weight, Material Distribution).
+- [ ] **PWA:** Manifest and Service Worker for mobile installability.
+- [ ] **Data Tools:** Import/Export JSON data.
+- [ ] **Expanded Presets:** Support for more brands (PolyMaker, eSun, etc.).
