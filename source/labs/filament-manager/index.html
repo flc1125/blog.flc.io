@@ -176,9 +176,14 @@
                 <div class="flex items-center gap-4 w-full lg:w-auto justify-between lg:justify-end">
                     <!-- 批量管理按钮 -->
                     <button @click="toggleSelectionMode"
-                            class="p-2 rounded-lg transition-colors flex items-center justify-center w-10 h-10"
+                            class="p-2 rounded-lg transition-colors flex items-center justify-center w-10 h-10 group relative"
                             :class="isSelectionMode ? 'bg-slate-800 text-white' : 'bg-white border border-slate-200 text-slate-500 hover:text-slate-800 hover:border-slate-300'">
                         <i class="ph-bold" :class="isSelectionMode ? 'ph-x' : 'ph-list-checks text-xl'"></i>
+                        
+                        <!-- Tooltip -->
+                        <div class="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-slate-800 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap pointer-events-none z-50 font-medium">
+                            {{ isSelectionMode ? '退出批量管理' : '批量管理' }}
+                        </div>
                     </button>
 
                     <!-- 聚合开关 (仅在库存Tab显示) -->
