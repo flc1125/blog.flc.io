@@ -14,7 +14,7 @@
         {
             "source": "/labs/filament-manager/(.*)",
             "destination": "https://fil.flc.io/$1",
-            "permanent": false
+            "permanent": true
         }
     ]
 }
