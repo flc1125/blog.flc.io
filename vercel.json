@@ -1,0 +1,15 @@
+{
+    "redirects": [
+        {
+            "source": "/(.*)",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "www.flc.io"
+                }
+            ],
+            "destination": "https://flc.io/$1",
+            "permanent": true
+        }
+    ]
+}
