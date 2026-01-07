@@ -20,6 +20,7 @@ code_dir: downloads/code
 i18n_dir: ':lang'
 skip_render:
     - labs/**
+    - shared/**
 new_post_name: ':title.md'
 default_layout: post
 titlecase: false

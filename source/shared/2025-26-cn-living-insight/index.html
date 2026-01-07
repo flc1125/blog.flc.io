@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025-2026 中国普通人生存与发展洞察报告</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Google Fonts (Noto Sans SC) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Chosen Palette: Warm Neutrality -->
+    <!--
+        Background: #FAFAF9 (Stone-50) - Warm, paper-like
+        Text: #1C1917 (Stone-900) - Sharp, readable
+        Primary Accent: #57534E (Stone-600) - Professional, grounded
+        Secondary Accent (Growth/Hope): #65A30D (Lime-600) - Muted nature tone
+        Secondary Accent (Warning/Stress): #EA580C (Orange-600) - Alert but not aggressive
+        Charts: Mixed palette based on stone, slate, and muted accents.
+    -->
+
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: #FAFAF9;
+            color: #1C1917;
+        }
+
+        /* Chart Container Styling - CRITICAL REQUIREMENT */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px; /* Base height */
+            max-height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        /* Custom Scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a29e;
+        }
+
+        .nav-active {
+            border-bottom: 2px solid #57534E;
+            font-weight: 700;
+            color: #1C1917;
+        }
+
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+
+    <!-- Application Structure Plan:
+         1. Hero Section: Sets the empathetic, analytical tone.
+         2. Section 1 (2025 Review): A tabbed interface. Users click dimensions (Wallet, Work, etc.) to see specific analysis and a reactive chart.
+            Reasoning: Allows focused comparison of 2024 vs 2025 without overwhelming the user.
+         3. Section 2 (2026 Forecast): A split-view dashboard. Left side controls scenarios/trends, Right side visualizes the "K-Shape" differentiation.
+            Reasoning: "K-Shape" is a complex concept; visualizing the divergence is key.
+         4. Section 3 (Survival Kit): A grid of actionable advice cards.
+            Reasoning: Provides clear, takeaway value at the end.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-stone-50 min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl">🔭</span>
+            <h1 class="text-lg sm:text-xl font-bold tracking-tight text-stone-800">2025-2026 生存与发展洞察</h1>
+        </div>
+        <nav class="hidden md:flex space-x-8 text-sm font-medium text-stone-500">
+            <a href="#review" class="hover:text-stone-900 transition-colors">2025 体感复盘</a>
+            <a href="#forecast" class="hover:text-stone-900 transition-colors">2026 趋势预判</a>
+            <a href="#advice" class="hover:text-stone-900 transition-colors">生存锦囊</a>
+        </nav>
+        <div class="md:hidden text-stone-400 text-sm">
+            Scroll Down ▼
+        </div>
+    </div>
+</header>
+
+<main class="flex-grow">
+
+    <!-- Hero Section -->
+    <section class="py-12 sm:py-20 bg-stone-100 border-b border-stone-200">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-stone-500 uppercase bg-stone-200 rounded-full">
+                年度特别报告
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-bold text-stone-900 mb-6 leading-tight">
+                从“阵痛”到“重塑”<br>
+                <span class="text-stone-500 font-normal text-2xl sm:text-3xl">寻找普通人的确定性锚点</span>
+            </h2>
+            <p class="text-lg text-stone-600 max-w-2xl mx-auto leading-relaxed">
+                站在2026年的起点，回望过去两年。我们经历了什么？钱包、职场、心态发生了怎样的巨变？
+                本报告抛开宏大叙事，致力于还原普通工薪家庭的真实“体感”，并推演未来的生存法则。
+            </p>
+        </div>
+    </section>
+
+    <!-- PART 1: 2025 Review -->
+    <!-- Visualization & Content Choices:
+         Goal: Compare 2024 vs 2025 subjective experiences.
+         Method: Interactive Tab + Dynamic Chart.js (Bar/Radar/Pie).
+         Justification: Users can explore each dimension (Wallet, Work, etc.) deeply. Charts visualize the qualitative shifts (e.g., "Face" vs "Lining" spending).
+    -->
+    <section id="review" class="py-16 max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="mb-10 border-l-4 border-stone-800 pl-4">
+            <h3 class="text-2xl font-bold text-stone-900">第一部分：2025年“体感”复盘</h3>
+            <p class="text-stone-600 mt-2">点击下方标签，查看不同维度的年度账单与生存日记。</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Navigation Tabs (Vertical on Desktop) -->
+            <div class="lg:col-span-3 flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0" id="review-tabs">
+                <!-- Tabs generated by JS -->
+            </div>
+
+            <!-- Content Panel -->
+            <div class="lg:col-span-9 bg-white rounded-xl shadow-sm border border-stone-200 p-6 sm:p-8 transition-all duration-300" id="review-content">
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <div class="flex-1 space-y-4">
+                        <h4 id="panel-title" class="text-xl font-bold text-stone-800 border-b pb-2"></h4>
+                        <div id="panel-desc" class="text-stone-600 leading-relaxed space-y-4 text-sm sm:text-base"></div>
+
+                        <div class="mt-4 p-4 bg-stone-50 rounded-lg border border-stone-100">
+                            <span class="block text-xs font-bold text-stone-400 uppercase tracking-wide mb-2">年度关键词</span>
+                            <div id="panel-keywords" class="flex flex-wrap gap-2"></div>
+                        </div>
+                    </div>
+
+                    <!-- Chart Container -->
+                    <div class="flex-1 w-full flex flex-col items-center justify-center bg-stone-50 rounded-lg p-4">
+                        <div class="chart-container">
+                            <canvas id="reviewChart"></canvas>
+                        </div>
+                        <p class="text-xs text-stone-400 mt-3 text-center italic">数据基于2025年社会观察样本模拟</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PART 2: 2026 Forecast -->
+    <!-- Visualization & Content Choices:
+         Goal: Show the divergence (K-Shape) and cost pressure.
+         Method: Dual-Line Chart (K-Shape) and Stacked Area (Costs).
+         Interaction: Scenario buttons to toggle view.
+         Justification: Visualizing the "split" is crucial for the "K-Shape" concept.
+    -->
+    <section id="forecast" class="py-16 bg-stone-900 text-stone-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 border-l-4 border-stone-400 pl-4">
+                <div>
+                    <h3 class="text-2xl font-bold text-white">第二部分：2026年趋势预判</h3>
+                    <p class="text-stone-400 mt-2">寻找确定性：K型分化与生活成本推演</p>
+                </div>
+                <div class="flex gap-2 mt-4 md:mt-0 bg-stone-800 p-1 rounded-lg">
+                    <button onclick="updateForecast('kshape')" id="btn-kshape" class="px-4 py-1.5 rounded-md text-sm font-medium bg-stone-600 text-white transition-all">K型分化</button>
+                    <button onclick="updateForecast('costs')" id="btn-costs" class="px-4 py-1.5 rounded-md text-sm font-medium text-stone-400 hover:text-white transition-all">生活成本</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Dynamic Text -->
+                <div class="space-y-6 order-2 md:order-1">
+                    <div id="forecast-text-container" class="space-y-4">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Dynamic Chart -->
+                <div class="bg-stone-800 rounded-xl p-6 border border-stone-700 shadow-xl order-1 md:order-2">
+                    <div class="chart-container">
+                        <canvas id="forecastChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PART 3: Survival Kit -->
+    <!-- Visualization & Content Choices:
+         Goal: Provide actionable advice.
+         Method: Card Grid with simple interactive hover/focus states.
+         Justification: Clear, digestible chunks of text. No complex charts needed here, focus on reading.
+    -->
+    <section id="advice" class="py-16 max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12">
+            <h3 class="text-2xl font-bold text-stone-900">第三部分：给普通人的2026生存锦囊</h3>
+            <p class="text-stone-500 mt-2 max-w-2xl mx-auto">基于趋势推演，给出的三条务实建议</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="card-hover bg-white p-8 rounded-2xl shadow-sm border border-stone-200 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <span class="text-6xl">💼</span>
+                </div>
+                <h4 class="text-lg font-bold text-stone-800 mb-4">职业：拥抱“人机协作”</h4>
+                <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                    不要试图与AI比拼效率，而要比拼“决策力”与“共情力”。
+                </p>
+                <ul class="space-y-2 text-sm text-stone-500">
+                    <li class="flex items-start gap-2">
+                        <span class="text-green-600 mt-1">●</span>
+                        <span><b>深耕细分领域：</b>做那个能写出精准Prompt的专家。</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-green-600 mt-1">●</span>
+                        <span><b>副业B计划：</b>不仅仅是送外卖，而是利用技能（咨询、手作）建立微小现金流。</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card-hover bg-white p-8 rounded-2xl shadow-sm border border-stone-200 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <span class="text-6xl">💰</span>
+                </div>
+                <h4 class="text-lg font-bold text-stone-800 mb-4">资产：防御性配置</h4>
+                <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                    现金为王，流动性优先。降低杠杆是第一要务。
+                </p>
+                <ul class="space-y-2 text-sm text-stone-500">
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-600 mt-1">●</span>
+                        <span><b>降低负债：</b>若有余力，优先偿还高息房贷，减轻月供压力。</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-blue-600 mt-1">●</span>
+                        <span><b>哑铃策略：</b>90%稳健理财（国债/大额存单）+ 10%高波动资产（黄金/定投）。</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card-hover bg-white p-8 rounded-2xl shadow-sm border border-stone-200 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <span class="text-6xl">🧘</span>
+                </div>
+                <h4 class="text-lg font-bold text-stone-800 mb-4">心态：建立“微观幸福”</h4>
+                <p class="text-stone-600 text-sm leading-relaxed mb-4">
+                    从宏大叙事的焦虑中抽离，关注具体的、可控的生活细节。
+                </p>
+                <ul class="space-y-2 text-sm text-stone-500">
+                    <li class="flex items-start gap-2">
+                        <span class="text-orange-600 mt-1">●</span>
+                        <span><b>反内卷：</b>寻找“低欲望”与“躺平”之间的平衡点，称为“自在”。</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-orange-600 mt-1">●</span>
+                        <span><b>健康投资：</b>最大的确定性是身体，增加对运动和体检的投入。</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="bg-stone-900 text-stone-400 py-8 border-t border-stone-800 mt-auto">
+    <div class="max-w-6xl mx-auto px-4 text-center text-sm">
+        <p>&copy; 2026 生存与发展洞察报告 | 模拟数据仅供参考</p>
+        <p class="mt-2 text-xs text-stone-600">Generated for Canvas Analysis Demo</p>
+    </div>
+</footer>
+
+<!-- JavaScript Logic -->
+<script>
+    // --- Data Source ---
+    // Storing the content derived from the "Source Report" context
+    const reviewData = {
+        wallet: {
+            title: "钱包与消费：由“面子”到“里子”",
+            desc: "2025年，消费降级不再是羞于启齿的话题，而是一种理性的回归。人们不再为logo带来的“面子”溢价买单，转而追求极致性价比（平替）和能带来真实快乐的“情绪价值”。买房买车不再是标配，现金流安全感成为了新的奢侈品。",
+            keywords: ["平替经济", "反向消费", "情绪价值", "去杠杆"],
+            chartType: 'bar',
+            chartConfig: {
+                labels: ['品牌溢价消费', '大宗资产(房/车)', '平替/极致性价比', '情绪/体验消费'],
+                datasets: [
+                    {
+                        label: '2024年',
+                        data: [70, 60, 40, 30],
+                        backgroundColor: '#D6D3D1', // Stone 300
+                        borderRadius: 4
+                    },
+                    {
+                        label: '2025年',
+                        data: [40, 30, 85, 75],
+                        backgroundColor: '#EA580C', // Orange 600
+                        borderRadius: 4
+                    }
+                ]
+            }
+        },
+        work: {
+            title: "职场与生计：AI博弈与存量厮杀",
+            desc: "AI工具的普及在2025年显露双刃剑效应：一方面是效率的提升，另一方面是初级白领的岗位削减。“副业”从可有可无的调剂变成了刚需的安全垫。35岁门槛依然存在，但灵活就业接纳了更多被优化的人群。",
+            keywords: ["AI焦虑", "副业刚需", "35岁门槛", "灵活就业"],
+            chartType: 'doughnut',
+            chartConfig: {
+                labels: ['纯工资收入', '副业/兼职收入', '理财/其他收入'],
+                datasets: [{
+                    data: [65, 25, 10],
+                    backgroundColor: ['#57534E', '#EA580C', '#A8A29E'],
+                    borderWidth: 0
+                }]
+            }
+        },
+        assets: {
+            title: "资产与负债：安全感压倒一切",
+            desc: "经历了两年的资产价格调整，“提前还贷潮”贯穿了2025全年。人们对风险资产（股市、楼市）避之不及，转而拥抱确定性——黄金、国债、大额存单。房产从“信仰”回归到“居住属性”。",
+            keywords: ["提前还贷", "黄金热", "存款搬家", "防御性理财"],
+            chartType: 'line',
+            chartConfig: {
+                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                datasets: [
+                    {
+                        label: '家庭负债率意愿',
+                        data: [60, 55, 48, 45],
+                        borderColor: '#EA580C',
+                        tension: 0.4
+                    },
+                    {
+                        label: '防御性储蓄意愿',
+                        data: [30, 40, 55, 65],
+                        borderColor: '#65A30D', // Lime 600
+                        tension: 0.4
+                    }
+                ]
+            }
+        },
+        mind: {
+            title: "社会心态：在内卷中寻找缝隙",
+            desc: "社会情绪从单纯的“焦虑”转向一种复杂的混合体。一方面是存量竞争的极致内卷，另一方面是放弃无谓竞争的“松弛感”自洽。人们开始接受“平凡”，在微观生活中寻找确定的幸福。",
+            keywords: ["低欲望自洽", "重新养育自己", "搭子文化", "微观幸福"],
+            chartType: 'radar',
+            chartConfig: {
+                labels: ['职业焦虑', '消费欲望', '身心关注', '社交活跃度', '储蓄意愿'],
+                datasets: [
+                    {
+                        label: '2024',
+                        data: [85, 80, 50, 70, 60],
+                        borderColor: '#A8A29E',
+                        backgroundColor: 'rgba(168, 162, 158, 0.2)'
+                    },
+                    {
+                        label: '2025',
+                        data: [75, 45, 90, 50, 95],
+                        borderColor: '#0EA5E9', // Sky 500
+                        backgroundColor: 'rgba(14, 165, 233, 0.2)'
+                    }
+                ]
+            }
+        }
+    };
+
+    const forecastData = {
+        kshape: {
+            title: "K型分化：2026年的复苏图景",
+            content: `
+                    <h4 class="text-xl font-bold text-white mb-2">上行 vs 下行：悲喜并不相通</h4>
+                    <p class="text-stone-300 text-sm leading-relaxed">
+                        2026年的经济复苏将呈现典型的<strong>“K型”特征</strong>。宏观政策的暖意不会均匀地传导给每一个人。
+                    </p>
+                    <ul class="space-y-4 mt-4 text-sm text-stone-300">
+                        <li class="bg-stone-800 p-3 rounded border-l-2 border-green-500">
+                            <strong class="text-white block mb-1">K型上端 (复苏者)：</strong>
+                            高科技制造业、AI应用层、出海企业、高端服务业。这部分群体将率先感受到收入的回暖。
+                        </li>
+                        <li class="bg-stone-800 p-3 rounded border-l-2 border-red-500">
+                            <strong class="text-white block mb-1">K型下端 (承压者)：</strong>
+                            传统建筑业、一般性行政岗、低技能服务业。这部分群体可能面临持续的薪资停滞甚至岗位优化。
+                        </li>
+                    </ul>
+                `,
+            chartType: 'line',
+            chartConfig: {
+                labels: ['2024', '2025', '2026(预)'],
+                datasets: [
+                    {
+                        label: 'K型上端行业 (科技/出海)',
+                        data: [100, 110, 135],
+                        borderColor: '#65A30D', // Green
+                        borderWidth: 3,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'K型下端行业 (传统/地产)',
+                        data: [100, 85, 75],
+                        borderColor: '#EF4444', // Red
+                        borderWidth: 3,
+                        tension: 0.3
+                    },
+                    {
+                        label: '基准线',
+                        data: [100, 100, 100],
+                        borderColor: '#57534E',
+                        borderDash: [5, 5],
+                        borderWidth: 1,
+                        pointRadius: 0
+                    }
+                ]
+            }
+        },
+        costs: {
+            title: "生活成本：通缩体感下的隐形压力",
+            content: `
+                    <h4 class="text-xl font-bold text-white mb-2">生活成本预测：刚需更硬</h4>
+                    <p class="text-stone-300 text-sm leading-relaxed">
+                        虽然普通消费品（家电、服饰、食品）可能维持<strong>低通胀甚至微通缩</strong>的体感，但核心服务类成本将显著上升。
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-4">
+                        <div class="bg-stone-800 p-3 rounded">
+                            <span class="block text-stone-400 text-xs">普通消费品</span>
+                            <span class="text-green-400 font-bold">↘ 价格亲民</span>
+                            <p class="text-xs text-stone-500 mt-1">供应链极度成熟，卷价格。</p>
+                        </div>
+                        <div class="bg-stone-800 p-3 rounded">
+                            <span class="block text-stone-400 text-xs">医疗/养老/教育</span>
+                            <span class="text-red-400 font-bold">↗ 成本攀升</span>
+                            <p class="text-xs text-stone-500 mt-1">人工成本上升，资源稀缺。</p>
+                        </div>
+                    </div>
+                `,
+            chartType: 'bar',
+            chartConfig: {
+                labels: ['基础饮食', '数码家电', '医疗养老', '子女教育'],
+                datasets: [{
+                    label: '2026 成本压力指数',
+                    data: [30, 20, 85, 90],
+                    backgroundColor: [
+                        '#65A30D', // Low pressure
+                        '#65A30D',
+                        '#EA580C', // High pressure
+                        '#EA580C'
+                    ]
+                }]
+            }
+        }
+    };
+
+    // --- Logic ---
+
+    let reviewChartInstance = null;
+    let forecastChartInstance = null;
+
+    // Initialize Review Section
+    function initReview() {
+        const tabsContainer = document.getElementById('review-tabs');
+        const categories = Object.keys(reviewData);
+
+        // Create Tabs
+        categories.forEach((cat, index) => {
+            const btn = document.createElement('button');
+            btn.className = `text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-stone-100 ${index === 0 ? 'bg-stone-200 text-stone-900 shadow-sm' : 'text-stone-500'}`;
+            btn.innerText = getTabName(cat);
+            btn.onclick = () => loadReviewContent(cat, btn);
+            tabsContainer.appendChild(btn);
+        });
+
+        // Load initial content
+        loadReviewContent('wallet', tabsContainer.children[0]);
+    }
+
+    function getTabName(cat) {
+        const map = { wallet: '💳 钱包与消费', work: '💼 职场与生计', assets: '🏠 资产与负债', mind: '🧠 社会心态' };
+        return map[cat];
+    }
+
+    function loadReviewContent(cat, activeBtn) {
+        // Update Tab Styles
+        const buttons = document.getElementById('review-tabs').children;
+        for(let btn of buttons) {
+            btn.className = 'text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-stone-100 text-stone-500';
+        }
+        activeBtn.className = 'text-left px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 bg-stone-200 text-stone-900 shadow-sm border-l-4 border-stone-600';
+
+        // Update Text Content
+        const data = reviewData[cat];
+        document.getElementById('panel-title').innerText = data.title;
+        document.getElementById('panel-desc').innerText = data.desc;
+
+        // Update Keywords
+        const kwContainer = document.getElementById('panel-keywords');
+        kwContainer.innerHTML = '';
+        data.keywords.forEach(kw => {
+            const span = document.createElement('span');
+            span.className = 'px-2 py-1 bg-white border border-stone-200 rounded text-xs text-stone-600 shadow-sm';
+            span.innerText = kw;
+            kwContainer.appendChild(span);
+        });
+
+        // Update Chart
+        updateReviewChart(data);
+    }
+
+    function updateReviewChart(data) {
+        const ctx = document.getElementById('reviewChart').getContext('2d');
+
+        if (reviewChartInstance) {
+            reviewChartInstance.destroy();
+        }
+
+        reviewChartInstance = new Chart(ctx, {
+            type: data.chartType,
+            data: data.chartConfig,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: { family: "'Noto Sans SC', sans-serif" }
+                        }
+                    }
+                },
+                scales: data.chartType === 'radar' ? {
+                    r: {
+                        angleLines: { color: '#E7E5E4' },
+                        grid: { color: '#E7E5E4' },
+                        pointLabels: { font: { size: 12 } }
+                    }
+                } : data.chartType !== 'doughnut' ? {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#E7E5E4' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                } : {}
+            }
+        });
+    }
+
+    // Initialize Forecast Section
+    function initForecast() {
+        updateForecast('kshape');
+    }
+
+    function updateForecast(type) {
+        const data = forecastData[type];
+
+        // Update Buttons
+        document.getElementById('btn-kshape').className = `px-4 py-1.5 rounded-md text-sm font-medium transition-all ${type === 'kshape' ? 'bg-stone-600 text-white' : 'text-stone-400 hover:text-white'}`;
+        document.getElementById('btn-costs').className = `px-4 py-1.5 rounded-md text-sm font-medium transition-all ${type === 'costs' ? 'bg-stone-600 text-white' : 'text-stone-400 hover:text-white'}`;
+
+        // Update Text
+        document.getElementById('forecast-text-container').innerHTML = data.content;
+
+        // Update Chart
+        const ctx = document.getElementById('forecastChart').getContext('2d');
+
+        if (forecastChartInstance) {
+            forecastChartInstance.destroy();
+        }
+
+        // Dark Mode Chart Options
+        const darkOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { color: '#A8A29E' }
+                }
+            },
+            scales: {
+                y: {
+                    grid: { color: '#44403C' },
+                    ticks: { color: '#A8A29E' }
+                },
+                x: {
+                    grid: { color: '#44403C' },
+                    ticks: { color: '#A8A29E' }
+                }
+            }
+        };
+
+        forecastChartInstance = new Chart(ctx, {
+            type: data.chartType,
+            data: data.chartConfig,
+            options: darkOptions
+        });
+    }
+
+    // Run Init
+    window.addEventListener('DOMContentLoaded', () => {
+        initReview();
+        initForecast();
+    });
+
+</script>
+</body>
+</html>
